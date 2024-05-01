@@ -6,5 +6,40 @@
 {% endblock meta %} 
 
 {% block content %}
-    <h1>Daftar Favorit</h1>
+    <div class="container align-items-center">
+        <div class="row">
+            <p class="display-1 text-center">Daftar Favorit</p>
+        </div>
+        <div class="row text-center">
+            <div class="row">
+                <div class="col">
+                    Judul
+                </div>
+                <div class="col">
+                    Waktu Ditambahkan
+                </div>
+                <div class="col">
+                    Aksi
+                </div>
+            </div>
+            {% if daftar_favorit_user %}
+                {% for favorit in daftar_favorit_user %}
+                    <div class="row">
+                        <div class="col">
+                            {{ favorit.judul }}
+                        </div>
+                        <div class="col">
+                            {{ favorit.waktu_ditambahkan }}
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-danger">Hapus Favorit</button>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div style="height: 50px;"></div>
+                <p class="h6">- Anda belum menambahkan tayangan ke daftar favorit -</p>
+            {% endif %}
+        </div>
+    </div>
 {% endblock content %}
