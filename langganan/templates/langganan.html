@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+<title>Daftar Langganan</title>
+{% endblock meta %}
+
+{% block content %}
+<h1
+    class="m-4 text-4xl font-bold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white text-center">
+    Kelola Langganan</h1>
+
+<p class="text-base m-4">Paket Langganan Aktif Anda</p>
+
+<div class="m-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Nama
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Harga
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Resolusi Layar
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Dukungan Perangkat
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Tanggal Dimulai
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Tanggal Berakhir
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Premium
+                </th>
+                <td class="px-6 py-4">
+                    Rp20.000
+                </td>
+                <td class="px-6 py-4">
+                    4K
+                </td>
+                <td class="px-6 py-4">
+                    iOS, Android, TV
+                </td>
+                <td class="px-6 py-4">
+                    29/04/2024
+                </td>
+                <td class="px-6 py-4">
+                    29/10/2024
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<p class="m-4 text-base">Pilih Paket Lain</p>
+
+<div class="m-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Nama
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Harga
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Resolusi Layar
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Dukungan Perangkat
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    <span class="sr-only">Beli</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Premium
+                </th>
+                <td class="px-6 py-4">
+                    Rp20.000
+                </td>
+                <td class="px-6 py-4">
+                    4K
+                </td>
+                <td class="px-6 py-4">
+                    iOS, Android, TV
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Beli</a>
+                </td>
+            </tr>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Plus
+                </th>
+                <td class="px-6 py-4">
+                    Rp15.000
+                </td>
+                <td class="px-6 py-4">
+                    Full HD
+                </td>
+                <td class="px-6 py-4">
+                    iOS, Android, TV
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Beli</a>
+                </td>
+            </tr>
+            <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Reguler
+                </th>
+                <td class="px-6 py-4">
+                    Rp10.000
+                </td>
+                <td class="px-6 py-4">
+                    HD
+                </td>
+                <td class="px-6 py-4">
+                    iOS, Android
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Beli</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<p class="m-4 text-base">Riwayat Transaksi</p>
+
+<div class="m-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Nama Paket
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Tanggal Dimulai
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Tanggal Akhir
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Metode Pembayaran
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Tanggal Pembayaran
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Total Pembayaran
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Premium
+                </th>
+                <td class="px-6 py-4">
+                    29/04/2024
+                </td>
+                <td class="px-6 py-4">
+                    29/10/2024
+                </td>
+                <td class="px-6 py-4">
+                    GoPay
+                </td>
+                <td class="px-6 py-4">
+                    29/04/2024
+                </td>
+                <td class="px-6 py-4">
+                    Rp20.000
+                </td>
+            </tr>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Plus
+                </th>
+                <td class="px-6 py-4">
+                    15/03/2024
+                </td>
+                <td class="px-6 py-4">
+                    15/09/2024
+                </td>
+                <td class="px-6 py-4">
+                    ShopeePay
+                </td>
+                <td class="px-6 py-4">
+                    15/03/2024
+                </td>
+                <td class="px-6 py-4">
+                    Rp15.000
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+{% endblock content %}
