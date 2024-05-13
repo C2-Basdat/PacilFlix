@@ -27,7 +27,7 @@ class DatabaseConnection:
 
     def execute_sql_query(self, query, fetch=True):
         cursor = self.connection.cursor()
-        cursor.execute("SET search_path TO sistel")
+        cursor.execute("SET search_path TO pacilflix")
         cursor.execute(query)
         self.connection.commit()
 
@@ -41,7 +41,7 @@ class DatabaseConnection:
 
     def execute_sql_query_no_fetch(self, query):
         cursor = self.connection.cursor()
-        cursor.execute("SET search_path TO sistel")
+        cursor.execute("SET search_path TO pacilflix")
         cursor.execute(query)
         self.connection.commit()
         cursor.close()
