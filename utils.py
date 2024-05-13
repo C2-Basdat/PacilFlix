@@ -9,9 +9,6 @@ class DatabaseConnection:
         self.port = '39869'
         self.connection = None
 
-        # Membuka koneksi saat objek dibuat
-        self.connect()
-
     def connect(self):
         self.connection = psycopg2.connect(
             dbname=self.dbname,
@@ -26,6 +23,8 @@ class DatabaseConnection:
             self.connection.close()
 
     def execute_sql_query(self, query, fetch=True):
+        # Membuka koneksi saat objek dibuat
+        self.connect()
         cursor = self.connection.cursor()
         cursor.execute("SET search_path TO pacilflix")
         cursor.execute(query)
@@ -37,11 +36,15 @@ class DatabaseConnection:
 
         cursor.close()
 
+        self.disconnect()
+
         return result
 
     def execute_sql_query_no_fetch(self, query):
+        self.connect()
         cursor = self.connection.cursor()
         cursor.execute("SET search_path TO pacilflix")
         cursor.execute(query)
         self.connection.commit()
         cursor.close()
+        self.disconnect()
