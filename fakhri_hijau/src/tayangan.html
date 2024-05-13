@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>My Website</title>
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <link href="./output.css" rel="stylesheet" />
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+
+  </head>
+  <body>
+    <header>
+            <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+                <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                    <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
+                        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">PacilFlix - C2</span>
+                    </a>
+                    <div class="flex justify-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                        <button type="button" class="flex text-sm bg-white rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                            </svg> 
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+                        <div class="px-4 py-3">
+                            <span class="block text-sm text-gray-900 dark:text-white">John Doe</span>
+                        </div>
+                        <ul class="py-2" aria-labelledby="user-menu-button">
+                            <li>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Kelola Daftar Favorit</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Kelola Daftar Unduhan</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Kelola Langganan</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</a>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                    <div class="grow items-center justify-end px-5 hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+                        <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                            <!-- Ini utk yg selected (biru) -->
+                            <!-- <li>
+                                <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Selected</a>
+                            </li> -->
+                            <li>
+                                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Trailer Tayangan</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Daftar Tayangan</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Daftar Kontributor</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+              </nav>
+        </header>
+    <div class="mt-3 flex justify-center content-center">
+      <div
+        class="mx-3 my-3 px-5 py-5 relative overflow-x-auto shadow-xl sm:rounded-lg"
+      >
+        <div class="flex justify-center content-center;">
+          <div class="text-center">
+            <h1>DAFTAR TAYANGAN</h1>
+            <label
+              for="Judul Tayangan"
+              class="block text-sm font-medium leading-6 text-gray-900"
+              >Judul Tayangan</label
+            >
+            <div class="flex justify-center content-center">
+              <input
+                type="text"
+                name="Judul Tayangan"
+                id="Judul Tayangan"
+                class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                placeholder="Judul Tayangan"
+              />
+              <button
+                type="button"
+                class="mx-3 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabel 1 - Trailer -->
+        <h1 class="mt-5 text-center">10 Tayangan Terbaik Minggu ini</h1>
+        <!-- <div class="mt-3 flex justify-center content-center">
+      <button id="showTableA">Tampilkan Tabel A</button>
+      <button id="showTableB">Tampilkan Tabel B</button>
+    </div> -->
+
+        <div class="mt-3 flex justify-center content-center">
+          <div class="inline-flex rounded-md shadow-sm">
+            <a
+              id="showTableA"
+              class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white"
+            >
+              Global
+            </a>
+            <a
+              id="showTableB"
+              class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white"
+            >
+              Negara Pengguna
+            </a>
+          </div>
+        </div>
+
+        <div class="mt-3 flex justify-center">
+          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table
+              id="tableA"
+              class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+            >
+              <thead
+                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+              >
+                <tr>
+                  <th scope="col" class="px-6 py-3">Peringkat</th>
+                  <th scope="col" class="px-6 py-3">Judul</th>
+                  <th scope="col" class="px-6 py-3">Sinopsis</th>
+                  <th scope="col" class="px-6 py-3">URL Video Trailer</th>
+                  <th scope="col" class="px-6 py-3">Tanggal Rilis Trailer</th>
+                  <th scope="col" class="px-6 py-3">
+                    Total Review 7 Hari Terakhir
+                  </th>
+                  <th scope="col" class="px-6 py-3">Tayangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    1
+                  </th>
+                  <td class="px-6 py-4">Guardians of the Galaxy</td>
+                  <td class="px-6 py-4">
+                    Kisah tentang pencurian yang penuh dengan teka-teki dan
+                    intrik yang rumit.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://test-example.net/trailer_1.mp4"
+                      >http://test-example.net/trailer_1.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2018-04-21 00:00:00</td>
+                  <td class="px-6 py-4">100</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <!-- Tambahkan baris-baris berikut sesuai dengan data yang diberikan -->
+                <!-- Pastikan untuk menyesuaikan data di setiap kolom sesuai dengan data yang diberikan -->
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    2
+                  </th>
+                  <td class="px-6 py-4">Breaking Bad</td>
+                  <td class="px-6 py-4">
+                    Drama romantis tentang kisah cinta yang rumit di tengah
+                    kehidupan kota besar.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://test-site.com/trailer_2.mp4"
+                      >http://test-site.com/trailer_2.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2015-01-18 00:00:00</td>
+                  <td class="px-6 py-4">99</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    3
+                  </th>
+                  <td class="px-6 py-4">Sherlock Holmes</td>
+                  <td class="px-6 py-4">
+                    Kisah cinta tragis antara dua orang yang berasal dari dunia
+                    yang berbeda.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://example.com/trailer_3.mp4"
+                      >http://example.com/trailer_3.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2014-09-06 00:00:00</td>
+                  <td class="px-6 py-4">98</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <!-- Baris-baris berikut disesuaikan dengan data yang diberikan -->
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    4
+                  </th>
+                  <td class="px-6 py-4">La La Land</td>
+                  <td class="px-6 py-4">
+                    Sebuah kisah penuh inspirasi tentang seorang pria yang
+                    bertahan melalui berbagai ujian kehidupan.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://example.net/trailer_4.mp4"
+                      >http://example.net/trailer_4.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2017-10-18 00:00:00</td>
+                  <td class="px-6 py-4">97</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    5
+                  </th>
+                  <td class="px-6 py-4">Avengers: Endgame</td>
+                  <td class="px-6 py-4">
+                    Sebuah petualangan menegangkan dalam pencarian harta karun
+                    yang hilang.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://dummy-site.com/trailer_5.mp4"
+                      >http://dummy-site.com/trailer_5.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2018-05-01 00:00:00</td>
+                  <td class="px-6 py-4">95</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    6
+                  </th>
+                  <td class="px-6 py-4">Interstellar</td>
+                  <td class="px-6 py-4">
+                    Sebuah kisah magis tentang kekuatan sihir yang mengubah
+                    takdir.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://example.com/trailer_6.mp4"
+                      >http://example.com/trailer_6.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2016-10-03 00:00:00</td>
+                  <td class="px-6 py-4">93</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    7
+                  </th>
+                  <td class="px-6 py-4">Titanic</td>
+                  <td class="px-6 py-4">
+                    Kisah penuh intrik dan pengkhianatan di sebuah kerajaan yang
+                    penuh gejolak.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://example.org/trailer_7.mp4"
+                      >http://example.org/trailer_7.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2016-02-18 00:00:00</td>
+                  <td class="px-6 py-4">91</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    8
+                  </th>
+                  <td class="px-6 py-4">The Lord of the Rings</td>
+                  <td class="px-6 py-4">
+                    Kisah romantis tentang cinta yang abadi di tengah kekacauan
+                    perang.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://test-site.com/trailer_8.mp4"
+                      >http://test-site.com/trailer_8.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2015-07-31 00:00:00</td>
+                  <td class="px-6 py-4">88</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    9
+                  </th>
+                  <td class="px-6 py-4">Forrest Gump</td>
+                  <td class="px-6 py-4">
+                    Kisah persahabatan yang tidak terlupakan di antara
+                    sekelompok anak-anak yang bertahan dalam situasi sulit.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://test-site.com/trailer_9.mp4"
+                      >http://test-site.com/trailer_9.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2016-05-22 00:00:00</td>
+                  <td class="px-6 py-4">76</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    10
+                  </th>
+                  <td class="px-6 py-4">Game of Thrones</td>
+                  <td class="px-6 py-4">
+                    Sebuah cerita futuristik tentang teknologi dan peradaban
+                    manusia di masa mendatang.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://dummy-website.net/trailer_10.mp4"
+                      >http://dummy-website.net/trailer_10.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2015-02-26 00:00:00</td>
+                  <td class="px-6 py-4">56</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="flex justify-center">
+          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table
+              id="tableB"
+              class="hidden w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+            >
+              <thead
+                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+              >
+                <tr>
+                  <th scope="col" class="px-6 py-3">Peringkat</th>
+                  <th scope="col" class="px-6 py-3">Judul</th>
+                  <th scope="col" class="px-6 py-3">Sinopsis</th>
+                  <th scope="col" class="px-6 py-3">URL Video Trailer</th>
+                  <th scope="col" class="px-6 py-3">Tanggal Rilis Trailer</th>
+                  <th scope="col" class="px-6 py-3">
+                    Total Review 7 Hari Terakhir
+                  </th>
+                  <th scope="col" class="px-6 py-3">Tayangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    1
+                  </th>
+                  <td class="px-6 py-4">Guardians of the Galaxy</td>
+                  <td class="px-6 py-4">
+                    Kisah tentang pencurian yang penuh dengan teka-teki dan
+                    intrik yang rumit.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://test-example.net/trailer_1.mp4"
+                      >http://test-example.net/trailer_1.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2018-04-21 00:00:00</td>
+                  <td class="px-6 py-4">100</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <!-- Tambahkan baris-baris berikut sesuai dengan data yang diberikan -->
+                <!-- Pastikan untuk menyesuaikan data di setiap kolom sesuai dengan data yang diberikan -->
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    2
+                  </th>
+                  <td class="px-6 py-4">Breaking Bad</td>
+                  <td class="px-6 py-4">
+                    Drama romantis tentang kisah cinta yang rumit di tengah
+                    kehidupan kota besar.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://test-site.com/trailer_2.mp4"
+                      >http://test-site.com/trailer_2.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2015-01-18 00:00:00</td>
+                  <td class="px-6 py-4">99</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    3
+                  </th>
+                  <td class="px-6 py-4">Sherlock Holmes</td>
+                  <td class="px-6 py-4">
+                    Kisah cinta tragis antara dua orang yang berasal dari dunia
+                    yang berbeda.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://example.com/trailer_3.mp4"
+                      >http://example.com/trailer_3.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2014-09-06 00:00:00</td>
+                  <td class="px-6 py-4">98</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <!-- Baris-baris berikut disesuaikan dengan data yang diberikan -->
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    4
+                  </th>
+                  <td class="px-6 py-4">La La Land</td>
+                  <td class="px-6 py-4">
+                    Sebuah kisah penuh inspirasi tentang seorang pria yang
+                    bertahan melalui berbagai ujian kehidupan.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://example.net/trailer_4.mp4"
+                      >http://example.net/trailer_4.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2017-10-18 00:00:00</td>
+                  <td class="px-6 py-4">97</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    5
+                  </th>
+                  <td class="px-6 py-4">Avengers: Endgame</td>
+                  <td class="px-6 py-4">
+                    Sebuah petualangan menegangkan dalam pencarian harta karun
+                    yang hilang.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://dummy-site.com/trailer_5.mp4"
+                      >http://dummy-site.com/trailer_5.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2018-05-01 00:00:00</td>
+                  <td class="px-6 py-4">95</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    6
+                  </th>
+                  <td class="px-6 py-4">Interstellar</td>
+                  <td class="px-6 py-4">
+                    Sebuah kisah magis tentang kekuatan sihir yang mengubah
+                    takdir.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://example.com/trailer_6.mp4"
+                      >http://example.com/trailer_6.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2016-10-03 00:00:00</td>
+                  <td class="px-6 py-4">93</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    7
+                  </th>
+                  <td class="px-6 py-4">Titanic</td>
+                  <td class="px-6 py-4">
+                    Kisah penuh intrik dan pengkhianatan di sebuah kerajaan yang
+                    penuh gejolak.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://example.org/trailer_7.mp4"
+                      >http://example.org/trailer_7.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2016-02-18 00:00:00</td>
+                  <td class="px-6 py-4">91</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    8
+                  </th>
+                  <td class="px-6 py-4">The Lord of the Rings</td>
+                  <td class="px-6 py-4">
+                    Kisah romantis tentang cinta yang abadi di tengah kekacauan
+                    perang.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://test-site.com/trailer_8.mp4"
+                      >http://test-site.com/trailer_8.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2015-07-31 00:00:00</td>
+                  <td class="px-6 py-4">88</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    9
+                  </th>
+                  <td class="px-6 py-4">Forrest Gump</td>
+                  <td class="px-6 py-4">
+                    Kisah persahabatan yang tidak terlupakan di antara
+                    sekelompok anak-anak yang bertahan dalam situasi sulit.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://test-site.com/trailer_9.mp4"
+                      >http://test-site.com/trailer_9.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2016-05-22 00:00:00</td>
+                  <td class="px-6 py-4">76</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    10
+                  </th>
+                  <td class="px-6 py-4">Game of Thrones</td>
+                  <td class="px-6 py-4">
+                    Sebuah cerita futuristik tentang teknologi dan peradaban
+                    manusia di masa mendatang.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://dummy-website.net/trailer_10.mp4"
+                      >http://dummy-website.net/trailer_10.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2015-02-26 00:00:00</td>
+                  <td class="px-6 py-4">56</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <h1 class="mt-5 text-center">Film</h1>
+        <div class="mt-3 flex justify-center">
+          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table
+              class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+            >
+              <thead
+                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+              >
+                <tr>
+                  <th scope="col" class="px-6 py-3">Judul</th>
+                  <th scope="col" class="px-6 py-3">Sinopsis Trailer</th>
+                  <th scope="col" class="px-6 py-3">Link Trailer</th>
+                  <th scope="col" class="px-6 py-3">Tanggal Rilis Trailer</th>
+                  <th scope="col" class="px-6 py-3">Tayangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">Interstellar</td>
+                  <td class="px-6 py-4">
+                    Seorang pemuda yang melintasi galaksi untuk menyelamatkan
+                    kerajaannya dari kegelapan yang mengancam.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://example.com/trailer_6.mp4"
+                      >http://example.com/trailer_6.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2016-10-03 00:00:00</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <!-- Tambahkan baris-baris berikut sesuai dengan data yang diberikan -->
+                <!-- Pastikan untuk menyesuaikan data di setiap kolom sesuai dengan data yang diberikan -->
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">Titanic</td>
+                  <td class="px-6 py-4">
+                    Seorang detektif jenius yang memecahkan misteri kriminal
+                    yang paling rumit.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://example.org/trailer_7.mp4"
+                      >http://example.org/trailer_7.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2016-02-18 00:00:00</td>
+                  <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">The Lord of the Rings</td>
+                  <td class="px-6 py-4">
+                    Kisah penuh intrik dan pengkhianatan di sebuah kerajaan yang
+                    penuh gejolak.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://test-site.com/trailer_8.mp4"
+                      >http://test-site.com/trailer_8.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2015-07-31 00:00:00</td>
+                <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">Forrest Gump</td>
+                  <td class="px-6 py-4">
+                    Sebuah serial fiksi ilmiah tentang eksperimen mengerikan di
+                    laboratorium rahasia.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://test-site.com/trailer_9.mp4"
+                      >http://test-site.com/trailer_9.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2016-05-22 00:00:00</td>
+                <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">Game of Thrones</td>
+                  <td class="px-6 py-4">
+                    Petualangan seorang penyihir yang berusaha menyelamatkan
+                    dunia dari kehancuran yang pasti.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://dummy-website.net/trailer_10.mp4"
+                      >http://dummy-website.net/trailer_10.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2015-02-26 00:00:00</td>
+                <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">The Dark Knight</td>
+                  <td class="px-6 py-4">
+                    Kisah persahabatan yang tidak terlupakan di antara
+                    sekelompok anak-anak yang bertahan dalam situasi sulit.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://dummy-example.org/trailer_11.mp4"
+                      >http://dummy-example.org/trailer_11.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2019-03-06 00:00:00</td>
+                <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">Jurassic Park</td>
+                  <td class="px-6 py-4">
+                    Seorang penjara bawah tanah yang menyimpan rahasia gelap
+                    yang harus diungkapkan.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://test-example.net/trailer_12.mp4"
+                      >http://test-example.net/trailer_12.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2018-06-08 00:00:00</td>
+                <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">Narcos</td>
+                  <td class="px-6 py-4">
+                    Sebuah perjalanan yang menakjubkan ke dunia yang penuh
+                    misteri dan bahaya.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://test-site.com/trailer_13.mp4"
+                      >http://test-site.com/trailer_13.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2015-02-08 00:00:00</td>
+                <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">Inception</td>
+                  <td class="px-6 py-4">
+                    Kisah cinta tragis antara dua orang yang berasal dari dunia
+                    yang berbeda.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://example.net/trailer_14.mp4"
+                      >http://example.net/trailer_14.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2015-01-22 00:00:00</td>
+                <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">Joker</td>
+                  <td class="px-6 py-4">
+                    Sebuah kisah penuh inspirasi tentang seorang pria yang
+                    bertahan melalui berbagai ujian kehidupan.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://example.com/trailer_15.mp4"
+                      >http://example.com/trailer_15.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2019-02-08 00:00:00</td>
+                <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <h1 class="mt-5 text-center">Series</h1>
+        <div class="mt-3 flex justify-center">
+          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table
+              class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+            >
+              <thead
+                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+              >
+                <tr>
+                  <th scope="col" class="px-6 py-3">Judul</th>
+                  <th scope="col" class="px-6 py-3">Sinopsis Trailer</th>
+                  <th scope="col" class="px-6 py-3">URL Trailer</th>
+                  <th scope="col" class="px-6 py-3">Tanggal Rilis Trailer</th>
+                  <th scope="col" class="px-6 py-3">Tayangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">Guardians of the Galaxy</td>
+                  <td class="px-6 py-4">
+                    Sebuah petualangan menegangkan dalam pencarian harta karun
+                    yang hilang.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://test-example.net/trailer_1.mp4"
+                      >http://test-example.net/trailer_1.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2018-04-21 00:00:00</td>
+                <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">Breaking Bad</td>
+                  <td class="px-6 py-4">
+                    Drama romantis tentang kisah cinta yang rumit di tengah
+                    kehidupan kota besar.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://test-site.com/trailer_2.mp4"
+                      >http://test-site.com/trailer_2.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2015-01-18 00:00:00</td>
+                <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">Sherlock Holmes</td>
+                  <td class="px-6 py-4">
+                    Kisah penuh aksi tentang pertempuran antara kebaikan dan
+                    kejahatan di dunia fantasi.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://example.com/trailer_3.mp4"
+                      >http://example.com/trailer_3.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2014-09-06 00:00:00</td>
+                <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">La La Land</td>
+                  <td class="px-6 py-4">
+                    Sebuah kisah epik tentang kelompok pahlawan super yang
+                    bersatu untuk melawan ancaman terbesar.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://example.net/trailer_4.mp4"
+                      >http://example.net/trailer_4.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2017-10-18 00:00:00</td>
+                <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">Avengers: Endgame</td>
+                  <td class="px-6 py-4">
+                    Kehidupan seorang agen rahasia yang berjuang melawan
+                    musuh-musuhnya dalam serangkaian misi berbahaya.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://dummy-site.com/trailer_5.mp4"
+                      >http://dummy-site.com/trailer_5.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2018-05-01 00:00:00</td>
+                <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mx-5 my-5 flex justify-center content-center">
+      <div class="px-10 py-10 relative overflow-x-auto shadow-xl sm:rounded-lg">
+        <div class="flex justify-center content-center;">
+          <div class="text-center">
+            <h1>Hasil Pencarian</h1>
+            <label
+              for="Judul Tayangan"
+              class="block text-sm font-medium leading-6 text-gray-900"
+              >Judul Tayangan</label
+            >
+            <div class="flex justify-center content-center">
+              <input
+                type="text"
+                name="Judul Tayangan"
+                id="Judul Tayangan"
+                class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                placeholder="Judul Tayangan"
+              />
+              <button
+                type="button"
+                class="mx-3 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="mt-3 flex justify-center">
+          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table
+              class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+            >
+              <thead
+                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+              >
+                <tr>
+                  <th scope="col" class="px-6 py-3">Judul</th>
+                  <th scope="col" class="px-6 py-3">Sinopsis Trailer</th>
+                  <th scope="col" class="px-6 py-3">URL Trailer</th>
+                  <th scope="col" class="px-6 py-3">Tanggal Rilis Trailer</th>
+                  <th scope="col" class="px-6 py-3">Tayangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">Guardians of the Galaxy</td>
+                  <td class="px-6 py-4">
+                    Sebuah petualangan menegangkan dalam pencarian harta karun
+                    yang hilang.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://test-example.net/trailer_1.mp4"
+                      >http://test-example.net/trailer_1.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2018-04-21 00:00:00</td>
+                <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">Breaking Bad</td>
+                  <td class="px-6 py-4">
+                    Drama romantis tentang kisah cinta yang rumit di tengah
+                    kehidupan kota besar.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://test-site.com/trailer_2.mp4"
+                      >http://test-site.com/trailer_2.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2015-01-18 00:00:00</td>
+                <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">Sherlock Holmes</td>
+                  <td class="px-6 py-4">
+                    Kisah penuh aksi tentang pertempuran antara kebaikan dan
+                    kejahatan di dunia fantasi.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://example.com/trailer_3.mp4"
+                      >http://example.com/trailer_3.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2014-09-06 00:00:00</td>
+                <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">La La Land</td>
+                  <td class="px-6 py-4">
+                    Sebuah kisah epik tentang kelompok pahlawan super yang
+                    bersatu untuk melawan ancaman terbesar.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://example.net/trailer_4.mp4"
+                      >http://example.net/trailer_4.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2017-10-18 00:00:00</td>
+                <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td class="px-6 py-4">Avengers: Endgame</td>
+                  <td class="px-6 py-4">
+                    Kehidupan seorang agen rahasia yang berjuang melawan
+                    musuh-musuhnya dalam serangkaian misi berbahaya.
+                  </td>
+                  <td class="px-6 py-4">
+                    <a href="http://dummy-site.com/trailer_5.mp4"
+                      >http://dummy-site.com/trailer_5.mp4</a
+                    >
+                  </td>
+                  <td class="px-6 py-4">2018-05-01 00:00:00</td>
+                <td class="px-6 py-4">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >Tonton</a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <script src="index.js"></script> -->
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
+    <script>
+      // Mengambil tombol dan tabel
+      const buttonA = document.getElementById("showTableA");
+      const buttonB = document.getElementById("showTableB");
+      const tableA = document.getElementById("tableA");
+      const tableB = document.getElementById("tableB");
+
+      // Menambahkan event listener untuk tombol A
+      buttonA.addEventListener("click", function () {
+        // Menampilkan tabel A dan menyembunyikan tabel B
+        tableA.classList.remove("hidden");
+        tableB.classList.add("hidden");
+      });
+
+      // Menambahkan event listener untuk tombol B
+      buttonB.addEventListener("click", function () {
+        // Menampilkan tabel B dan menyembunyikan tabel A
+        tableB.classList.remove("hidden");
+        tableA.classList.add("hidden");
+      });
+    </script>
+  </body>
+</html>
