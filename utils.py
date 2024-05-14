@@ -32,7 +32,7 @@ class DatabaseConnection:
         return [dict(row) for row in cursor.fetchall()]
 
 
-    def execute_sql_query(self, query_str: str):
+    def query(self, query_str: str):
         self.connect()
         hasil = []
         with self.connection.cursor(cursor_factory=RealDictCursor) as cursor:
