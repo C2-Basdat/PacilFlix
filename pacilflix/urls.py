@@ -22,5 +22,8 @@ urlpatterns = [
     path('daftar-favorit/', include('daftar_favorit.urls')),
     path('daftar-unduhan/', include('daftar_unduhan.urls')),
     path('langganan/', include('langganan.urls')),
-    path('kontributor/', include('kontributor.urls'))
+    path('kontributor/', include('kontributor.urls')),
+    path('fakhri-hijau/', include('fakhri_hijau.urls')),
+    path('auth/', include('authentication.urls')),
+    path("__reload__/", include("django_browser_reload.urls")),
 ]
