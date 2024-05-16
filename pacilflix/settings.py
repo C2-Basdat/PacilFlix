@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'daftar_favorit',
     'daftar_unduhan',
+    'fakhri_hijau'
     'authentication',
     "django_browser_reload",
 ]

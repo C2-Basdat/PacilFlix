@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>My Website</title>
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <link href="./output.css" rel="stylesheet" />
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+            <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+                <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                    <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
+                        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">PacilFlix - C2</span>
+                    </a>
+                    <div class="flex justify-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                        <button type="button" class="flex text-sm bg-white rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                            </svg> 
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+                        <div class="px-4 py-3">
+                            <span class="block text-sm text-gray-900 dark:text-white">John Doe</span>
+                        </div>
+                        <ul class="py-2" aria-labelledby="user-menu-button">
+                            <li>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Kelola Daftar Favorit</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Kelola Daftar Unduhan</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Kelola Langganan</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</a>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                    <div class="grow items-center justify-end px-5 hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+                        <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                            <!-- Ini utk yg selected (biru) -->
+                            <!-- <li>
+                                <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Selected</a>
+                            </li> -->
+                            <li>
+                                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Trailer Tayangan</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Daftar Tayangan</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Daftar Kontributor</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+              </nav>
+        </header>
+
+    <div class="px-10 py-5 mx-10 mt-5">
+      <h1
+        class="my-10 text-center text-xl font-bold leading-none text-gray-900 dark:text-white"
+      >
+        Halaman Episode
+      </h1>
+      <h2
+        class="px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Judul: Sherlock Holmes
+      </h2>
+      <h2
+        class="px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Subjudul: Episode 1: Mistery in Baker Street
+      </h2>
+      <div class="flex justify-center my-5">
+        <button type="button" class="text-gray-900 bg-[#F7BE38] hover:bg-[#F7BE38]/90 focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2">
+        Nonton Sekarang
+        </button>
+      </div>
+      <div class="my-5 px-20 mx-20">
+        <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
+          Episode Lainnya:
+        </h2>
+        <ul
+          class="max-w-md space-y-1 text-500 list-disc list-inside dark:text-gray-400"
+        >
+          <li><a href="#">Episode 2</a></li>
+          <li><a href="#">Episode 3</a></li>
+          <!-- <li><a href="#">Episode 3</a></li> -->
+        </ul>
+      </div>
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Sinopsis: Ada pembunuhan di Baker Street London tepatnya di sebelah rumah holmes
+      </h2>
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Durasi Film: 60 Menit
+      </h2>
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        URL Film: www.sherlock-watch.com
+      </h2>
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Tanggal Rilis Episode: 27-08-2018
+      </h2>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
+  </body>
+</html>
