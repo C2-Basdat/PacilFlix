@@ -1,15 +1,13 @@
-{% extends 'base.html' %} 
+{% extends 'navbar_loggedin.html' %} 
 
 {% block meta %}
-    <title>Pacilflix - Daftar Favorit</title>
+    {{ block.super }}
+        <title>Pacilflix - Daftar Favorit</title>
 {% endblock meta %} 
 
 {% block content %}
-    </br>  
-    </br>  
-    </br>  
-    </br>  
-    <div class="container align-items-center">
+    {{ block.super }}
+        <div class="container align-items-center">
         <div class="row">
             <p class="display-1 text-center">Daftar Favorit</p>
         </div>
@@ -19,8 +17,9 @@
                 <div class="col">Waktu Ditambahkan</div>
                 <div class="col">Aksi</div>
             </div>
-            {% if daftar_favorit_user %} {% for favorit in daftar_favorit_user %}
-            <div class="row">
+            {% if daftar_favorit_user %} 
+                {% for favorit in daftar_favorit_user %}
+                    <div class="row">
                 <div class="col">{{ favorit.judul }}</div>
                 <div class="col">{{ favorit.waktu_ditambahkan }}</div>
                 <div class="col">
@@ -28,11 +27,12 @@
                         Hapus Favorit
                     </button>
                 </div>
-            </div>
-            {% endfor %} {% else %}
-            <div style="height: 50px"></div>
-            <p class="h6">- Anda belum menambahkan tayangan ke daftar favorit -</p>
+                    </div>
+                {% endfor %} 
+            {% else %}
+                <div style="height: 50px"></div>
+                <p class="h6">- Anda belum menambahkan tayangan ke daftar favorit -</p>
             {% endif %}
         </div>
-    </div>
+        </div>
 {% endblock content %}
