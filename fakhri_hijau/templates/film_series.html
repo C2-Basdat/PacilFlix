@@ -78,8 +78,31 @@
       >
         Judul: {{ film.title }}
       </h2>
-      <label for="default-range" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Menit Nonton</label>
-      <input id="default-range" type="range" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+      <form method="POST" action="{% url 'read_film_series' film.film_id %}">
+        {% csrf_token %}
+        <div class="flex justify-center my-5">
+          <label
+            for="default-range"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Menit Nonton</label
+          >
+        </div>
+        <input
+          id="default-range"
+          name="durasi"
+          type="range"
+          value="0"
+          class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+        /><br />
+        <div class="flex justify-center my-5">
+          <button
+            type="submit"
+            class="text-gray-900 bg-[#F7BE38] hover:bg-[#F7BE38]/90 focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2"
+          >
+            Selesai nonton
+          </button>
+        </div>
+      </form>
       <div class="flex justify-center my-5">
         <div class="inline-flex rounded-md shadow-sm" role="group">
           <button
@@ -234,29 +257,6 @@
                 </div>
               </li>
               {% endfor %}
-              <!-- <li class="pt-3 pb-0 sm:pt-4">
-                <div class="flex items-center">
-                  <div class="flex-shrink-0">
-                    <img
-                      class="w-8 h-8 rounded-full"
-                      src="/docs/images/people/profile-picture-5.jpg"
-                      alt="Thomas image"
-                    />
-                  </div>
-                  <div class="flex-1 min-w-0 ms-4">
-                    <p
-                      class="text-sm font-medium text-gray-900 truncate dark:text-white"
-                    >
-                      Thomes Lean
-                    </p>
-                    <p
-                      class="text-sm text-gray-500 truncate dark:text-gray-400"
-                    >
-                      email@windster.com
-                    </p>
-                  </div>
-                </div>
-              </li> -->
             </ul>
           </div>
         </div>
@@ -316,7 +316,12 @@
         class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
       >
         Ulasan Film Ini <span>
-            <button type="button" class="mx-3 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Lihat Ulasan</button>
+            <form method="GET" action="{% url 'create_read_ulasan' %}">
+              <input type="hidden" name="id_tayangan" value="{{ film.film_id }}">
+              <button type="submit" class="mx-3 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Lihat Ulasan
+              </button>
+            </form>
         </span>
       </h2>
     {% endfor %}
@@ -328,14 +333,12 @@
       >
         Halaman Series
       </h1>
+      {% for series in data_series %}
       <h2
         class="px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
       >
-        Judul: Sherlock Holmes
-      </h2>
-      
-      <label for="default-range" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Menit Nonton</label>
-      <input id="default-range" type="range" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+        Judul: {{ series.title }}
+    </h2>
 
       <div class="my-5 px-20 mx-20">
         <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
@@ -344,9 +347,19 @@
         <ul
           class="max-w-md space-y-1 text-500 list-disc list-inside dark:text-gray-400"
         >
-          <li><a href="#">Episode 1</a></li>
-          <li><a href="#">Episode 2</a></li>
-          <li><a href="#">Episode 3</a></li>
+          {% for judul_episode, link_episode in series.judul_url_episodes %}
+          <!-- Form dengan dua input yang tersembunyi -->
+          <form id="myForm" method="get" action="{% url 'read_episode' %}">
+            <!-- Input pertama -->
+            <input type="hidden" name="id_tayangan" value="{{ series.series_id }}">
+            <!-- Input kedua -->
+            <input type="hidden" name="judul_episode" value="{{ judul_episode }}">
+            <li>
+              <!-- Tombol submit -->
+              <input type="submit" value="{{ judul_episode }}">
+            </li>
+          </form>
+          {% endfor %}
         </ul>
       </div>
       <div class="flex justify-center my-5">
@@ -397,17 +410,17 @@
       <h2
         class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
       >
-        Total View: 103432
+        Total View: {{ series.total_views }}
       </h2>
       <h2
         class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
       >
-        Rating Rata-Rata: 4.5
+        Rating Rata-Rata: {{ series.average_rating }}
       </h2>
       <h2
         class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
       >
-        Sinopsis: Kisah Pembunuhan dan Detektif Cerdas Terkenal
+        Sinopsis: {{ series.synopsis }}
       </h2>
 
       <div class="my-5 px-20 mx-20">
@@ -415,18 +428,18 @@
           Genre:
         </h2>
         <ul
-          class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400"
+        class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400"
         >
-          <li>Action</li>
-          <li>Thriller</li>
-          <li>Mystery</li>
+          {% for genre in series.genres %}
+          <li>{{ genre }}</li>
+          {% endfor %}
         </ul>
       </div>
 
       <h2
         class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
       >
-        Asal Negara: USA
+        Asal Negara: {{ series.country }}
       </h2>
 
       <div class="flex justify-center content-center">
@@ -452,121 +465,25 @@
               role="list"
               class="divide-y divide-gray-200 dark:divide-gray-700"
             >
+              {% for actor in series.actors %}
               <li class="py-3 sm:py-4">
                 <div class="flex items-center">
                   <div class="flex-shrink-0">
-                    <img
-                      class="w-8 h-8 rounded-full"
-                      src="/docs/images/people/profile-picture-1.jpg"
-                      alt="Neil image"
-                    />
+                    <svg class="w-[32px] h-[32px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                    </svg>
+
                   </div>
                   <div class="flex-1 min-w-0 ms-4">
                     <p
                       class="text-sm font-medium text-gray-900 truncate dark:text-white"
                     >
-                      Neil Sims
-                    </p>
-                    <p
-                      class="text-sm text-gray-500 truncate dark:text-gray-400"
-                    >
-                      email@windster.com
+                      {{ actor }}
                     </p>
                   </div>
                 </div>
               </li>
-              <li class="py-3 sm:py-4">
-                <div class="flex items-center">
-                  <div class="flex-shrink-0">
-                    <img
-                      class="w-8 h-8 rounded-full"
-                      src="/docs/images/people/profile-picture-3.jpg"
-                      alt="Bonnie image"
-                    />
-                  </div>
-                  <div class="flex-1 min-w-0 ms-4">
-                    <p
-                      class="text-sm font-medium text-gray-900 truncate dark:text-white"
-                    >
-                      Bonnie Green
-                    </p>
-                    <p
-                      class="text-sm text-gray-500 truncate dark:text-gray-400"
-                    >
-                      email@windster.com
-                    </p>
-                  </div>
-                </div>
-              </li>
-              <li class="py-3 sm:py-4">
-                <div class="flex items-center">
-                  <div class="flex-shrink-0">
-                    <img
-                      class="w-8 h-8 rounded-full"
-                      src="/docs/images/people/profile-picture-2.jpg"
-                      alt="Michael image"
-                    />
-                  </div>
-                  <div class="flex-1 min-w-0 ms-4">
-                    <p
-                      class="text-sm font-medium text-gray-900 truncate dark:text-white"
-                    >
-                      Michael Gough
-                    </p>
-                    <p
-                      class="text-sm text-gray-500 truncate dark:text-gray-400"
-                    >
-                      email@windster.com
-                    </p>
-                  </div>
-                </div>
-              </li>
-              <li class="py-3 sm:py-4">
-                <div class="flex items-center">
-                  <div class="flex-shrink-0">
-                    <img
-                      class="w-8 h-8 rounded-full"
-                      src="/docs/images/people/profile-picture-4.jpg"
-                      alt="Lana image"
-                    />
-                  </div>
-                  <div class="flex-1 min-w-0 ms-4">
-                    <p
-                      class="text-sm font-medium text-gray-900 truncate dark:text-white"
-                    >
-                      Lana Byrd
-                    </p>
-                    <p
-                      class="text-sm text-gray-500 truncate dark:text-gray-400"
-                    >
-                      email@windster.com
-                    </p>
-                  </div>
-                </div>
-              </li>
-              <li class="pt-3 pb-0 sm:pt-4">
-                <div class="flex items-center">
-                  <div class="flex-shrink-0">
-                    <img
-                      class="w-8 h-8 rounded-full"
-                      src="/docs/images/people/profile-picture-5.jpg"
-                      alt="Thomas image"
-                    />
-                  </div>
-                  <div class="flex-1 min-w-0 ms-4">
-                    <p
-                      class="text-sm font-medium text-gray-900 truncate dark:text-white"
-                    >
-                      Thomes Lean
-                    </p>
-                    <p
-                      class="text-sm text-gray-500 truncate dark:text-gray-400"
-                    >
-                      email@windster.com
-                    </p>
-                  </div>
-                </div>
-              </li>
+              {% endfor %}
             </ul>
           </div>
         </div>
@@ -594,124 +511,25 @@
               role="list"
               class="divide-y divide-gray-200 dark:divide-gray-700"
             >
+              {% for writer in series.writers %}
               <li class="py-3 sm:py-4">
                 <div class="flex items-center">
                   <div class="flex-shrink-0">
-                    <img
-                      class="w-8 h-8 rounded-full"
-                      src="/docs/images/people/profile-picture-1.jpg"
-                      alt="Neil image"
-                    />
+                    <svg class="w-[32px] h-[32px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                    </svg>
+
                   </div>
                   <div class="flex-1 min-w-0 ms-4">
                     <p
                       class="text-sm font-medium text-gray-900 truncate dark:text-white"
                     >
-                      Neil Sims
-                    </p>
-                    <p
-                      class="text-sm text-gray-500 truncate dark:text-gray-400"
-                    >
-                      email@windster.com
+                      {{ writer }}
                     </p>
                   </div>
                 </div>
               </li>
-              <li class="py-3 sm:py-4">
-                <div class="flex items-center">
-                  <div class="flex-shrink-0">
-                    <img
-                      class="w-8 h-8 rounded-full"
-                      src="/docs/images/people/profile-picture-3.jpg"
-                      alt="Bonnie image"
-                    />
-                  </div>
-                  <div class="flex-1 min-w-0 ms-4">
-                    <p
-                      class="text-sm font-medium text-gray-900 truncate dark:text-white"
-                    >
-                      Bonnie Green
-                    </p>
-                    <p
-                      class="text-sm text-gray-500 truncate dark:text-gray-400"
-                    >
-                      email@windster.com
-                    </p>
-                  </div>
-                </div>
-              </li>
-              <li class="py-3 sm:py-4">
-                <div class="flex items-center">
-                  <div class="flex-shrink-0">
-                    <img
-                      class="w-8 h-8 rounded-full"
-                      src="/docs/images/people/profile-picture-2.jpg"
-                      alt="Michael image"
-                    />
-                  </div>
-                  <div class="flex-1 min-w-0 ms-4">
-                    <p
-                      class="text-sm font-medium text-gray-900 truncate dark:text-white"
-                    >
-                      Michael Gough
-                    </p>
-                    <p
-                      class="text-sm text-gray-500 truncate dark:text-gray-400"
-                    >
-                      email@windster.com
-                    </p>
-                  </div>
-                </div>
-              </li>
-              <li class="py-3 sm:py-4">
-                <div class="flex items-center">
-                  <div class="flex-shrink-0">
-                    <img
-                      class="w-8 h-8 rounded-full"
-                      src="/docs/images/people/profile-picture-4.jpg"
-                      alt="Lana image"
-                    />
-                  </div>
-                  <div class="flex-1 min-w-0 ms-4">
-                    <p
-                      class="text-sm font-medium text-gray-900 truncate dark:text-white"
-                    >
-                      Lana Byrd
-                    </p>
-                    <p
-                      class="text-sm text-gray-500 truncate dark:text-gray-400"
-                    >
-                      email@windster.com
-                    </p>
-                  </div>
-                </div>
-              </li>
-              <li class="pt-3 pb-0 sm:pt-4">
-                <div class="flex items-center">
-                  <div class="flex-shrink-0">
-                    <img
-                      class="w-8 h-8 rounded-full"
-                      src="/docs/images/people/profile-picture-5.jpg"
-                      alt="Thomas image"
-                    />
-                  </div>
-                  <div class="flex-1 min-w-0 ms-4">
-                    <p
-                      class="text-sm font-medium text-gray-900 truncate dark:text-white"
-                    >
-                      Thomes Lean
-                    </p>
-                    <p
-                      class="text-sm text-gray-500 truncate dark:text-gray-400"
-                    >
-                      email@windster.com
-                    </p>
-                  </div>
-                  <div
-                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
-                  ></div>
-                </div>
-              </li>
+              {% endfor %}
             </ul>
           </div>
         </div>
@@ -719,15 +537,21 @@
       <h2
         class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
       >
-        Sutradara: Deborah White
+        Sutradara: {{ series.director }}
       </h2>
       <h2
         class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
       >
         Ulasan Series Ini <span>
-            <button type="button" class="mx-3 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Lihat Ulasan</button>
+            <form method="GET" action="{% url 'create_read_ulasan' %}">
+              <input type="hidden" name="id_tayangan" value="{{ series.series_id }}">
+              <button type="submit" class="mx-3 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Lihat Ulasan
+              </button>
+            </form>
         </span>
       </h2>
+      {% endfor %}
       
       {% endif %}
     </div>
