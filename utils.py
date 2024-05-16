@@ -40,7 +40,7 @@ class DatabaseConnection:
             try:
                 cursor.execute(query_str)
 
-                if query_str.strip().upper().startswith("SELECT"):
+                if query_str.strip().upper().startswith("SELECT") or query_str.strip().upper().startswith("WITH"):
                     # Kalau ga error, return hasil SELECT
                     hasil = self.map_cursor(cursor)
                 else:

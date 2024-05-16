@@ -286,7 +286,7 @@
                   <td class="px-6 py-4">{{ tayangan.total_view_7_hari_terakhir }}</td>
                   <td class="px-6 py-4">
                     <a
-                      href=""
+                      href="{% url 'read_film_series' tayangan.id %}"
                       class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                       >Tonton</a
                     >
@@ -327,7 +327,7 @@
                   <td class="px-6 py-4">{{ film.release_date_trailer }}</td>
                   <td class="px-6 py-4">
                     <a
-                      href="#"
+                      href="{% url 'read_film_series' film.id %}"
                       class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                       >Tonton</a
                     >
@@ -368,7 +368,7 @@
                   <td class="px-6 py-4">{{ series.release_date_trailer }}</td>
                   <td class="px-6 py-4">
                     <a
-                      href="#"
+                      href="{% url 'read_film_series' series.id %}"
                       class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                       >Tonton</a
                     >
@@ -443,7 +443,7 @@
                   <td class="px-6 py-4">{{ tayangan.release_date_trailer }}</td>
                   <td class="px-6 py-4">
                     <a
-                      href="#"
+                      href="{% url 'read_film_series' tayangan.id %}"
                       class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                       >Tonton</a
                     >
