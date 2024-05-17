@@ -3,7 +3,19 @@ from utils import DatabaseConnection
 
 def index(request):
     database = DatabaseConnection()
-    query_str = """
+
+    filter = request.GET.get('filter', None)
+
+    if filter == 'sutradara':
+        where_clause = 'WHERE s.id IS NOT NULL'
+    elif filter == 'pemain':
+        where_clause = 'WHERE p.id IS NOT NULL'
+    elif filter == 'skenario':
+        where_clause = 'WHERE ps.id IS NOT NULL'
+    else:
+        where_clause = ''
+
+    query_str = f"""
     SELECT
         nama,
         (CASE
@@ -25,6 +37,7 @@ def index(request):
             LEFT JOIN SUTRADARA s on c.id=s.id
             LEFT JOIN PEMAIN p on c.id=p.id
             LEFT JOIN PENULIS_SKENARIO ps on c.id=ps.id
+            {where_clause}
     );
     """
     contributors = database.query(query_str)

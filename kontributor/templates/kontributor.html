@@ -13,11 +13,12 @@
         Daftar Kontributor
     </h1>
 
-    <form class="m-4 max-w-sm">
-        <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Filter by</label>
-        <select id="countries"
+    <form class="m-4 max-w-sm" method="get">
+        <label for="filter" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Filter by</label>
+        <select id="filter" onchange="this.form.submit()" name="filter"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected>All</option>
+            <option selected>Pilih filter</option>
+            <option value="all">Semua</option>
             <option value="pemain">Pemain</option>
             <option value="sutradara">Sutradara</option>
             <option value="skenario">Penulis Skenario</option>
@@ -59,48 +60,6 @@
                     </td>
                 </tr>
                 {% endfor %}
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Robert Wilson
-                    </th>
-                    <td class="px-6 py-4">
-                        Pemain
-                    </td>
-                    <td class="px-6 py-4">
-                        Laki-laki
-                    </td>
-                    <td class="px-6 py-4">
-                        Indonesia
-                    </td>
-                </tr>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Stephanie Wright
-                    </th>
-                    <td class="px-6 py-4">
-                        Pemain, Penulis Skenario
-                    </td>
-                    <td class="px-6 py-4">
-                        Perempuan
-                    </td>
-                    <td class="px-6 py-4">
-                        USA
-                    </td>
-                </tr>
-                <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Laura Rodriguez
-                    </th>
-                    <td class="px-6 py-4">
-                        Pemain, Sutradara, Penulis Skenario
-                    </td>
-                    <td class="px-6 py-4">
-                        Perempuan
-                    </td>
-                    <td class="px-6 py-4">
-                        UK
-                    </td>
-                </tr>
             </tbody>
         </table>
     </div>
