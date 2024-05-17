@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+CSRF_TRUSTED_ORIGINS=['http://127.0.0.1:8000/','http://localhost:8000/']
+
 
 # Application definition
 
@@ -39,6 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'daftar_favorit',
     'daftar_unduhan',
+    'langganan',
+    'kontributor',
+    'fakhri_hijau',
+    'authentication',
+    'django_browser_reload',
+    'django.contrib.humanize'
 ]
 
 MIDDLEWARE = [
@@ -49,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'pacilflix.urls'
@@ -77,8 +86,12 @@ WSGI_APPLICATION = 'pacilflix.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'ANMavstJLrMuDfYHHAYWlbiJbJrYNkLh',
+        'HOST': 'monorail.proxy.rlwy.net',
+        'PORT': '39869',
     }
 }
 
@@ -101,6 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = ['authentication.backends.AuthBackend']
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -118,6 +132,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    'authentication/static/',
+    'static'
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

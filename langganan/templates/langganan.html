@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block meta %}
+    {{ block.super }}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <title>Daftar Langganan</title>
+{% endblock meta %}
+
+{% block content %}
+    {{ block.super }}
+    <h1
+        class="m-4 text-4xl font-bold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-gray-900 text-center">
+        Kelola Langganan
+    </h1>
+
+    <p class="text-base m-4">Paket Langganan Aktif Anda</p>
+
+    <div class="m-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Nama
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Harga
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Resolusi Layar
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Dukungan Perangkat
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Tanggal Dimulai
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Tanggal Berakhir
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {% if active %}
+                            {{ active.nama }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </th>
+                    <td class="px-6 py-4">
+                        {% if active %}
+                            Rp{{ active.harga|intcomma }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td class="px-6 py-4">
+                        {% if active %}
+                            {{ active.resolusi_layar }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td class="px-6 py-4">
+                        {% if active %}
+                            {{ active.dukungan_perangkat }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td class="px-6 py-4">
+                        {% if active %}
+                            {{ active.start_date_time }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td class="px-6 py-4">
+                        {% if active %}
+                            {{ active.end_date_time }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p class="m-4 text-base">Pilih Paket Lain</p>
+
+    <div class="m-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Nama
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Harga
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Resolusi Layar
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Dukungan Perangkat
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        <span class="sr-only">Beli</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in packages %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ p.nama }}
+                    </th>
+                    <td class="px-6 py-4">
+                        Rp{{ p.harga|intcomma }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ p.resolusi_layar }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ p.dukungan_perangkat }}
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <a href="/langganan/beli?paket={{ p.nama }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Beli</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <p class="m-4 text-base">Riwayat Transaksi</p>
+
+    <div class="m-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Nama Paket
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Tanggal Dimulai
+                </th>
+                    <th scope="col" class="px-6 py-3">
+                        Tanggal Akhir
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Metode Pembayaran
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Tanggal Pembayaran
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Total Pembayaran
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in transactions %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ t.nama }}
+                    </th>
+                    <td class="px-6 py-4">
+                        {{ t.start_date_time }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ t.end_date_time }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ t.metode_pembayaran }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ t.timestamp_pembayaran }}
+                    </td>
+                    <td class="px-6 py-4">
+                        Rp{{ t.harga|intcomma }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+{% endblock content %}

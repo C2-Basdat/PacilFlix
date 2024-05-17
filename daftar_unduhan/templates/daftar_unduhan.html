@@ -1,40 +1,47 @@
 {% extends 'base.html' %} 
 
 {% block meta %}
-    <title>Pacilflix - Daftar Unduhan</title>
+    {{ block.super }}
+        <title>Pacilflix - Daftar Unduhan</title>
 {% endblock meta %} 
 
 {% block content %}
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    <div class="container align-items-center">
-        <div class="row">
-            <p class="display-1 text-center">Daftar Unduhan</p>
-        </div>
-        <div class="row text-center">
+    {{ block.super }}
+        <div class="container align-items-center">
             <div class="row">
-                <div class="col">Judul</div>
-                <div class="col">Waktu Diunduh</div>
-                <div class="col">Aksi</div>
+                <p class="display-1 text-center">Daftar Unduhan</p>
             </div>
-            {% if daftar_unduhan_user %} {% for unduhan in daftar_unduhan_user %}
-            <div class="row">
-                <div class="col">{{ unduhan.judul }}</div>
-                <div class="col">{{ unduhan.waktu_diunduh }}</div>
-                <div class="col">
-                    <button type="button" class="btn btn-danger">
-                        Hapus Unduhan
-                    </button>
+            <div class="row text-center">
+                <div class="row">
+                    <div class="col">
+                        Judul
+                    </div>
+                    <div class="col">
+                        Waktu Diunduh
+                    </div>
+                    <div class="col">
+                        Aksi
+                    </div>
                 </div>
+                {% if daftar_unduhan_user %}
+                    {% for unduhan in daftar_unduhan_user %}
+                        <div class="row">
+                            <div class="col">
+                                {{ unduhan.judul }}
+                            </div>
+                            <div class="col">
+                                {{ unduhan.waktu_diunduh }}
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-danger">Hapus Unduhan</button>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div style="height: 50px;"></div>
+                    <p class="h6">- Anda belum memiliki unduhan -</p>
+                {% endif %}
             </div>
-            {% endfor %} {% else %}
-            <div style="height: 50px"></div>
-            <p class="h6">- Anda belum memiliki unduhan -</p>
-            {% endif %}
         </div>
-    </div>
 {% endblock content %}
+
