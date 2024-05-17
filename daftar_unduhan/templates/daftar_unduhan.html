@@ -7,41 +7,49 @@
 
 {% block content %}
     {{ block.super }}
-        <div class="container align-items-center">
-            <div class="row">
-                <p class="display-1 text-center">Daftar Unduhan</p>
-            </div>
-            <div class="row text-center">
-                <div class="row">
-                    <div class="col">
-                        Judul
-                    </div>
-                    <div class="col">
-                        Waktu Diunduh
-                    </div>
-                    <div class="col">
-                        Aksi
-                    </div>
-                </div>
-                {% if daftar_unduhan_user %}
-                    {% for unduhan in daftar_unduhan_user %}
-                        <div class="row">
-                            <div class="col">
-                                {{ unduhan.judul }}
-                            </div>
-                            <div class="col">
-                                {{ unduhan.waktu_diunduh }}
-                            </div>
-                            <div class="col">
-                                <button type="button" class="btn btn-danger">Hapus Unduhan</button>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <div style="height: 50px;"></div>
-                    <p class="h6">- Anda belum memiliki unduhan -</p>
-                {% endif %}
-            </div>
-        </div>
-{% endblock content %}
+        <h1
+            class="m-4 text-4xl font-bold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-gray-900 text-center">
+            Daftar Unduhan
+        </h1>
 
+        <div class="m-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Judul
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Waktu Diunduh
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Aksi
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if daftar_unduhan %}
+                        {% for unduhan in daftar_unduhan %}
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ unduhan.judul }}
+                                </th>
+                                <td class="px-6 py-4">
+                                    {{ unduhan.timestamp }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    <a href="{% url 'daftar_unduhan:delete_daftar_unduhan' unduhan.id_tayangan %}">
+                                        Hapus
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <p class="h6">- Anda belum menambahkan tayangan ke daftar favorit -</p>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+{% endblock content %}

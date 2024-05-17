@@ -163,20 +163,6 @@ def read_film_series(request, id_tayangan):
         context['data_series'] = data_series
     return render(request, 'film_series.html', context)
 
-
-def download_tayangan(request, id_tayangan):
-    database = DatabaseConnection()
-
-    if 'user' not in request.session:
-        return redirect("authentication:show_auth")
-    username = request.session['user']['username']
-
-    now = datetime.now()
-    formatted_now = now.strftime("%Y-%m-%d %H:%M:%S")
-    
-    database.query(f"INSERT INTO TAYANGAN_TERUNDUH VALUES('{id_tayangan}','{username}','{formatted_now}');")
-    return redirect('read_tayangan')
-
 def read_episode(request):
     database = DatabaseConnection()
     context = {}
