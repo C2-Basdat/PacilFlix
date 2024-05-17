@@ -1,9 +1,10 @@
 from django.urls import path
-from daftar_favorit.views import show_daftar_favorit, show_daftar_favorit_tw
+from daftar_favorit.views import delete_daftar_favorit, show_daftar_favorit, add_daftar_favorit
 
 app_name = 'daftar_favorit'
 
 urlpatterns = [
     path('', show_daftar_favorit, name='show_daftar_favorit'),
-    path('tw', show_daftar_favorit_tw, name='show_daftar_favorit_tw')
+    path('add-daftar-favorit/<str:judul>', add_daftar_favorit, name='add_daftar_favorit'),
+    path('delete-daftar-favorit/<str:judul>', delete_daftar_favorit, name='delete_daftar_favorit')
 ]
