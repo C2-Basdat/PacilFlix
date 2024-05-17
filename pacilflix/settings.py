@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'fakhri_hijau',
     'authentication',
     'django_browser_reload',
+    'django.contrib.humanize'
 ]
 
 MIDDLEWARE = [
