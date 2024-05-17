@@ -1,9 +1,7 @@
 import json
-from django.http import HttpResponseRedirect, HttpResponseNotFound, JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from authentication.backends import AuthBackend
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib import messages  
 
 def show_auth(request):
     return render(request, 'auth.html')
@@ -29,8 +27,8 @@ def auth_login(request):
     else:
         return JsonResponse(status=405)
         
-@csrf_exempt
 def auth_logout(request):
     if request.method == 'POST':
         be = AuthBackend()
         be.logout(request)
+        return HttpResponse("OK")
