@@ -1,6 +1,7 @@
 import json
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
+import psycopg2
 from authentication.backends import AuthBackend
 from django.views.decorators.csrf import csrf_exempt
 
@@ -33,3 +34,17 @@ def auth_logout(request):
         be = AuthBackend()
         be.logout(request)
         return HttpResponse("OK")
+    
+@csrf_exempt
+def auth_register(request):
+    if request.method == 'POST':
+        requestBody = json.load(request)
+        username = requestBody['username']
+        password = requestBody['password']
+        negara_asal = requestBody['negara_asal']
+        be = AuthBackend()
+        result = be.register(username, password, negara_asal)
+        if isinstance(result, psycopg2.errors.RaiseException):
+            return JsonResponse({'message': 'Register fail!'}, status=401)
+        else:
+            return JsonResponse({'message': 'Register success!'}, status=200)
