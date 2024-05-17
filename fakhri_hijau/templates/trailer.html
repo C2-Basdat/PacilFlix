@@ -1,449 +1,224 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>My Website</title>
-    <!-- <link rel="stylesheet" href="./style.css"> -->
-    <link href="./output.css" rel="stylesheet" />
-    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    {% block content %}
-    <header>
-      <nav
-        class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600"
-      >
-        <div
-          class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+{% extends 'navbar_loggedin.html' %} {% block meta %} {{ block.super }}
+<title>Pacilflix - Daftar Trailer</title>
+{% endblock meta %} {% block content %} {{ block.super }}
+<div class="mt-3 flex justify-center content-center">
+  <div
+    class="mx-3 my-3 px-5 py-5 relative overflow-x-auto shadow-xl sm:rounded-lg"
+  >
+    <div class="flex justify-center content-center;">
+      <div class="text-center">
+        <h1>DAFTAR TAYANGAN</h1>
+        <label
+          for="Judul Tayangan"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Judul Tayangan</label
         >
-          <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <span
-              class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
-              >PacilFlix - C2</span
-            >
-          </a>
-          <div
-            class="flex justify-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+        <form
+          action="{% url 'read_trailer' %}"
+          method="GET"
+          class="flex justify-center content-center"
+        >
+          <input
+            type="text"
+            name="judul"
+            id="Judul_Tayangan"
+            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            placeholder="Judul Tayangan"
+          />
+          <button
+            type="submit"
+            class="mx-3 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
-            <button
-              type="button"
-              class="flex text-sm bg-white rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-              id="user-menu-button"
-              aria-expanded="false"
-              data-dropdown-toggle="user-dropdown"
-              data-dropdown-placement="bottom"
-            >
-              <svg
-                class="w-6 h-6"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                />
-              </svg>
-            </button>
-            <!-- Dropdown menu -->
-            <div
-              class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
-              id="user-dropdown"
-            >
-              <div class="px-4 py-3">
-                <span class="block text-sm text-gray-900 dark:text-white"
-                  >John Doe</span
-                >
-              </div>
-              <ul class="py-2" aria-labelledby="user-menu-button">
-                <li>
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >Kelola Daftar Favorit</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >Kelola Daftar Unduhan</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >Kelola Langganan</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >Logout</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div
-            class="grow items-center justify-end px-5 hidden w-full md:flex md:w-auto md:order-1"
-            id="navbar-sticky"
-          >
-            <ul
-              class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
-            >
-              <!-- Ini utk yg selected (biru) -->
-              <!-- <li>
-                                <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Selected</a>
-                            </li> -->
-              <li>
-                <a
-                  href="#"
-                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                  >Trailer Tayangan</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                  >Daftar Tayangan</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                  >Daftar Kontributor</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
-    <div class="mt-3 flex justify-center content-center">
-      <div
-        class="mx-3 my-3 px-5 py-5 relative overflow-x-auto shadow-xl sm:rounded-lg"
-      >
-        <div class="flex justify-center content-center;">
-          <div class="text-center">
-            <h1>DAFTAR TAYANGAN</h1>
-            <label
-              for="Judul Tayangan"
-              class="block text-sm font-medium leading-6 text-gray-900"
-              >Judul Tayangan</label
-            >
-            <form
-              action="{% url 'read_trailer' %}"
-              method="GET"
-              class="flex justify-center content-center"
-            >
-              <input
-                type="text"
-                name="judul"
-                id="Judul_Tayangan"
-                class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder="Judul Tayangan"
-              />
-              <button
-                type="submit"
-                class="mx-3 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              >
-                Search
-              </button>
-            </form>
-          </div>
-        </div>
-
-        <!-- Tabel 1 - Trailer -->
-        <h1 class="mt-5 text-center">10 Tayangan Terbaik Minggu ini</h1>
-        <!-- <div class="mt-3 flex justify-center content-center">
-      <button id="showTableA">Tampilkan Tabel A</button>
-      <button id="showTableB">Tampilkan Tabel B</button>
-    </div> -->
-
-        <div class="mt-3 flex justify-center content-center">
-          <div class="inline-flex rounded-md shadow-sm">
-            <a
-              id="showTableA"
-              class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white"
-            >
-              Global
-            </a>
-            <a
-              id="showTableB"
-              class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white"
-            >
-              Negara Pengguna
-            </a>
-          </div>
-        </div>
-
-        <div class="mt-3 flex justify-center">
-          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table
-              id="tableA"
-              class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-            >
-              <thead
-                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-              >
-                <tr>
-                  <th scope="col" class="px-6 py-3">Peringkat</th>
-                  <th scope="col" class="px-6 py-3">Judul</th>
-                  <th scope="col" class="px-6 py-3">Sinopsis</th>
-                  <th scope="col" class="px-6 py-3">URL Video Trailer</th>
-                  <th scope="col" class="px-6 py-3">Tanggal Rilis Trailer</th>
-                  <th scope="col" class="px-6 py-3">
-                    Total Review 7 Hari Terakhir
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for tayangan in tayangan_terbaik %}
-                <tr
-                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                >
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    {{ tayangan.peringkat }}
-                  </th>
-                  <td class="px-6 py-4">{{ tayangan.judul }}</td>
-                  <td class="px-6 py-4">{{ tayangan.sinopsis_trailer }}</td>
-                  <td class="px-6 py-4">
-                    <a href="">{{ tayangan.url_video_trailer }}</a>
-                  </td>
-                  <td class="px-6 py-4">{{ tayangan.release_date_trailer }}</td>
-                  <td class="px-6 py-4">{{ tayangan.total_view_7_hari_terakhir }}</td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="flex justify-center">
-          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table
-              id="tableB"
-              class="hidden w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-            >
-              <thead
-                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-              >
-                <tr>
-                  <th scope="col" class="px-6 py-3">Peringkat</th>
-                  <th scope="col" class="px-6 py-3">Judul</th>
-                  <th scope="col" class="px-6 py-3">Sinopsis</th>
-                  <th scope="col" class="px-6 py-3">URL Video Trailer</th>
-                  <th scope="col" class="px-6 py-3">Tanggal Rilis Trailer</th>
-                  <th scope="col" class="px-6 py-3">
-                    Total Review 7 Hari Terakhir
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for tayangan in tayangan_terbaik %}
-                <tr
-                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                >
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    {{ tayangan.peringkat }}
-                  </th>
-                  <td class="px-6 py-4">{{ tayangan.judul }}</td>
-                  <td class="px-6 py-4">{{ tayangan.sinopsis_trailer }}</td>
-                  <td class="px-6 py-4">
-                    <a href="">{{ tayangan.url_video_trailer }}</a>
-                  </td>
-                  <td class="px-6 py-4">{{ tayangan.release_date_trailer }}</td>
-                  <td class="px-6 py-4">{{ tayangan.total_view_7_hari_terakhir }}</td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <h1 class="mt-5 text-center">Film</h1>
-        <div class="mt-3 flex justify-center">
-          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table
-              class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-            >
-              <thead
-                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-              >
-                <tr>
-                  <th scope="col" class="px-6 py-3">Judul</th>
-                  <th scope="col" class="px-6 py-3">Sinopsis Trailer</th>
-                  <th scope="col" class="px-6 py-3">Link Trailer</th>
-                  <th scope="col" class="px-6 py-3">Tanggal Rilis Trailer</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for film in trailer_film %}
-                <tr
-                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                >
-                  <td class="px-6 py-4">{{ film.judul }}</td>
-                  <td class="px-6 py-4">{{ film.sinopsis_trailer }}</td>
-                  <td class="px-6 py-4">
-                    <a href="">{{ film.url_video_trailer }}</a>
-                  </td>
-                  <td class="px-6 py-4">{{ film.release_date_trailer }}</td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <h1 class="mt-5 text-center">Series</h1>
-        <div class="mt-3 flex justify-center">
-          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table
-              class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-            >
-              <thead
-                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-              >
-                <tr>
-                  <th scope="col" class="px-6 py-3">Judul</th>
-                  <th scope="col" class="px-6 py-3">Sinopsis Trailer</th>
-                  <th scope="col" class="px-6 py-3">URL Trailer</th>
-                  <th scope="col" class="px-6 py-3">Tanggal Rilis Trailer</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for series in trailer_series %}
-                <tr
-                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                >
-                  <td class="px-6 py-4">{{ series.judul }}</td>
-                  <td class="px-6 py-4">{{ series.sinopsis_trailer }}</td>
-                  <td class="px-6 py-4">
-                    <a href="">{{ series.url_video_trailer }}</a>
-                  </td>
-                  <td class="px-6 py-4">{{ series.release_date_trailer }}</td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </div>
+            Search
+          </button>
+        </form>
       </div>
     </div>
 
-    {% if hasil_cari_tayangan %}
-    <div class="mx-5 my-5 flex justify-center content-center">
-      <div class="px-10 py-10 relative overflow-x-auto shadow-xl sm:rounded-lg">
-        <div class="flex justify-center content-center;">
-          <div class="text-center">
-            <h1>Hasil Pencarian</h1>
-            <label
-              for="Judul Tayangan"
-              class="block text-sm font-medium leading-6 text-gray-900"
-              >Judul Tayangan</label
+    <!-- Tabel 1 - Trailer -->
+    <h1 class="mt-5 text-center">10 Tayangan Terbaik Minggu ini</h1>
+
+    <div class="mt-3 flex justify-center">
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table
+          id="tableA"
+          class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+        >
+          <thead
+            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+          >
+            <tr>
+              <th scope="col" class="px-6 py-3">Peringkat</th>
+              <th scope="col" class="px-6 py-3">Judul</th>
+              <th scope="col" class="px-6 py-3">Sinopsis</th>
+              <th scope="col" class="px-6 py-3">URL Video Trailer</th>
+              <th scope="col" class="px-6 py-3">Tanggal Rilis Trailer</th>
+              <th scope="col" class="px-6 py-3">
+                Total Review 7 Hari Terakhir
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for tayangan in tayangan_terbaik %}
+            <tr
+              class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
             >
-            <form
-              action="{% url 'read_trailer' %}"
-              method="GET"
-              class="flex justify-center content-center"
-            >
-              <input
-                type="text"
-                name="judul"
-                id="Judul_Tayangan"
-                class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder="Judul Tayangan"
-              />
-              <button
-                type="submit"
-                class="mx-3 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
-                Search
-              </button>
-            </form>
-          </div>
-        </div>
-        <div class="mt-3 flex justify-center">
-          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table
-              class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-            >
-              <thead
-                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-              >
-                <tr>
-                  <th scope="col" class="px-6 py-3">Judul</th>
-                  <th scope="col" class="px-6 py-3">Sinopsis Trailer</th>
-                  <th scope="col" class="px-6 py-3">URL Trailer</th>
-                  <th scope="col" class="px-6 py-3">Tanggal Rilis Trailer</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for tayangan in hasil_cari_tayangan %}
-                <tr
-                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                >
-                  <td class="px-6 py-4">{{ tayangan.judul }}</td>
-                  <td class="px-6 py-4">{{ tayangan.sinopsis_trailer }}</td>
-                  <td class="px-6 py-4">
-                    <a href="">tayangan.url_video_trailer</a>
-                  </td>
-                  <td class="px-6 py-4">{{ tayangan.release_date_trailer }}</td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </div>
+                {{ tayangan.peringkat }}
+              </th>
+              <td class="px-6 py-4">{{ tayangan.judul }}</td>
+              <td class="px-6 py-4">{{ tayangan.sinopsis_trailer }}</td>
+              <td class="px-6 py-4">
+                <a href="">{{ tayangan.url_video_trailer }}</a>
+              </td>
+              <td class="px-6 py-4">{{ tayangan.release_date_trailer }}</td>
+              <td class="px-6 py-4">
+                {{ tayangan.total_view_7_hari_terakhir }}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
-      {% endif %}
     </div>
 
-    <!-- <script src="index.js"></script> -->
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-    <script>
-      // Mengambil tombol dan tabel
-      const buttonA = document.getElementById("showTableA");
-      const buttonB = document.getElementById("showTableB");
-      const tableA = document.getElementById("tableA");
-      const tableB = document.getElementById("tableB");
+    <h1 class="mt-5 text-center">Film</h1>
+    <div class="mt-3 flex justify-center">
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table
+          class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+        >
+          <thead
+            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+          >
+            <tr>
+              <th scope="col" class="px-6 py-3">Judul</th>
+              <th scope="col" class="px-6 py-3">Sinopsis Trailer</th>
+              <th scope="col" class="px-6 py-3">Link Trailer</th>
+              <th scope="col" class="px-6 py-3">Tanggal Rilis Trailer</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for film in trailer_film %}
+            <tr
+              class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+            >
+              <td class="px-6 py-4">{{ film.judul }}</td>
+              <td class="px-6 py-4">{{ film.sinopsis_trailer }}</td>
+              <td class="px-6 py-4">
+                <a href="">{{ film.url_video_trailer }}</a>
+              </td>
+              <td class="px-6 py-4">{{ film.release_date_trailer }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h1 class="mt-5 text-center">Series</h1>
+    <div class="mt-3 flex justify-center">
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table
+          class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+        >
+          <thead
+            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+          >
+            <tr>
+              <th scope="col" class="px-6 py-3">Judul</th>
+              <th scope="col" class="px-6 py-3">Sinopsis Trailer</th>
+              <th scope="col" class="px-6 py-3">URL Trailer</th>
+              <th scope="col" class="px-6 py-3">Tanggal Rilis Trailer</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for series in trailer_series %}
+            <tr
+              class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+            >
+              <td class="px-6 py-4">{{ series.judul }}</td>
+              <td class="px-6 py-4">{{ series.sinopsis_trailer }}</td>
+              <td class="px-6 py-4">
+                <a href="">{{ series.url_video_trailer }}</a>
+              </td>
+              <td class="px-6 py-4">{{ series.release_date_trailer }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
-      // Menambahkan event listener untuk tombol A
-      buttonA.addEventListener("click", function () {
-        // Menampilkan tabel A dan menyembunyikan tabel B
-        tableA.classList.remove("hidden");
-        tableB.classList.add("hidden");
-      });
-
-      // Menambahkan event listener untuk tombol B
-      buttonB.addEventListener("click", function () {
-        // Menampilkan tabel B dan menyembunyikan tabel A
-        tableB.classList.remove("hidden");
-        tableA.classList.add("hidden");
-      });
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-
-    {% endblock %}
-  </body>
-</html>
+{% if hasil_cari_tayangan %}
+<div class="mx-5 my-5 flex justify-center content-center">
+  <div class="px-10 py-10 relative overflow-x-auto shadow-xl sm:rounded-lg">
+    <div class="flex justify-center content-center;">
+      <div class="text-center">
+        <h1>Hasil Pencarian</h1>
+        <label
+          for="Judul Tayangan"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Judul Tayangan</label
+        >
+        <form
+          action="{% url 'read_trailer' %}"
+          method="GET"
+          class="flex justify-center content-center"
+        >
+          <input
+            type="text"
+            name="judul"
+            id="Judul_Tayangan"
+            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            placeholder="Judul Tayangan"
+          />
+          <button
+            type="submit"
+            class="mx-3 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Search
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="mt-3 flex justify-center">
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table
+          class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+        >
+          <thead
+            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+          >
+            <tr>
+              <th scope="col" class="px-6 py-3">Judul</th>
+              <th scope="col" class="px-6 py-3">Sinopsis Trailer</th>
+              <th scope="col" class="px-6 py-3">URL Trailer</th>
+              <th scope="col" class="px-6 py-3">Tanggal Rilis Trailer</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for tayangan in hasil_cari_tayangan %}
+            <tr
+              class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+            >
+              <td class="px-6 py-4">{{ tayangan.judul }}</td>
+              <td class="px-6 py-4">{{ tayangan.sinopsis_trailer }}</td>
+              <td class="px-6 py-4">
+                <a href="">tayangan.url_video_trailer</a>
+              </td>
+              <td class="px-6 py-4">{{ tayangan.release_date_trailer }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
