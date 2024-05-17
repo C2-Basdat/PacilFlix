@@ -1,9 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponseServerError
 from utils import DatabaseConnection
 
 def index(request):
+    if 'user' not in request.session:
+        return redirect("authentication:show_auth")
+
     database = DatabaseConnection()
-    username = 'bob'
+    username = request.session['user']['username']
     query_active = f"""
     WITH dukungan_perangkat_agg AS (
         SELECT
@@ -28,7 +32,7 @@ def index(request):
         JOIN paket p on p.nama=t.nama_paket
         JOIN dukungan_perangkat_agg dp on p.nama=dp.nama
     WHERE
-        u.username='alice'
+        u.username='{username}'
         AND CURRENT_DATE BETWEEN t.start_date_time AND t.end_date_time
     ORDER BY
         t.timestamp_pembayaran DESC
@@ -83,10 +87,68 @@ def index(request):
     context = {
         'active': active_package[0] if active_package else None,
         'packages': all_packages,
-        'transactions': all_transactions
+        'transactions': all_transactions,
+        'authenticated': True,
+        'username': request.session['user']['username']
     }
 
     return render(request, 'langganan.html', context)
 
 def beli(request):
-    return render(request, 'beli.html', {})
+    if 'user' not in request.session:
+        return redirect("authentication:show_auth")
+
+    database = DatabaseConnection()
+    if request.method == 'GET':
+        paket = request.GET.get('paket', None)
+        if paket == None:
+            return HttpResponseServerError("Error During Error Processing")
+        
+        query_str = f"""
+        WITH dukungan_perangkat_agg AS (
+            SELECT
+                p.nama,
+                STRING_AGG(dp.dukungan_perangkat, ', ') AS dukungan_perangkat
+            FROM
+                paket p
+                LEFT JOIN dukungan_perangkat dp ON p.nama=dp.nama_paket
+            GROUP BY
+                p.nama
+        )
+        SELECT
+            p.nama,
+            p.harga,
+            p.resolusi_layar,
+            dp.dukungan_perangkat
+        FROM
+            paket p
+            JOIN dukungan_perangkat_agg dp on p.nama=dp.nama
+        WHERE
+            p.nama ILIKE '{paket}';
+        """
+
+        package = database.query(query_str)
+
+        context = {
+            'paket': package[0],
+            'authenticated': True,
+            'username': request.session['user']['username']
+        }
+
+        return render(request, 'beli.html', context)
+    elif request.method == 'POST':
+        username = request.session['user']['username']
+        paket = request.POST.get('paket')
+        payment_method = request.POST.get('method')
+
+        query_str = f"""
+        INSERT INTO
+            transaction
+        VALUES
+            ('{username}', CURRENT_DATE, CURRENT_DATE + INTERVAL '1' MONTH, '{paket}', '{payment_method}', NOW()::timestamp(0));
+        """
+
+        result = database.query(query_str)
+        print(result)
+
+        return redirect('langganan:index')

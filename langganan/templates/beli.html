@@ -1,4 +1,5 @@
 {% extends 'navbar_loggedin.html' %}
+{% load humanize %}
 
 {% block meta %}
     {{ block.super }}
@@ -36,37 +37,44 @@
             <tbody>
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Premium
+                        {{ paket.nama }}
                     </th>
                     <td class="px-6 py-4">
-                        Rp20.000
+                        Rp{{ paket.harga|intcomma }}
                     </td>
                     <td class="px-6 py-4">
-                        4K
+                        {{ paket.resolusi_layar }}
                     </td>
                     <td class="px-6 py-4">
-                        iOS, Android, TV
+                        {{ paket.dukungan_perangkat }}
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <form class="m-4 items-start max-w-sm">
-        <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pilih Metode
+    <form class="m-4 items-start max-w-sm" method="post">
+        {% csrf_token %}
+        <input type="hidden" id="paket" name="paket" value="{{ paket.nama }}">
+        <label for="method" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pilih Metode
             Pembayaran</label>
-        <select id="countries"
+        <select id="method" name="method"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected value="transfer">Transfer Bank</option>
-            <option value="credit">Kartu Kredit</option>
-            <option value="ewallet">E-Wallet</option>
+            <option selected value="Transfer Bank">Transfer Bank</option>
+            <option value="Alfamart">Alfamart</option>
+            <option value="Cash">Cash</option>
+            <option value="Dana">Dana</option>
+            <option value="Gopay">GoPay</option>
+            <option value="Indomaret">Indomaret</option>
+            <option value="LinkAja">LinkAja</option>
+            <option value="ShopeePay">ShopeePay</option>
         </select>
-    </form>
 
-    <div class="flex justify-center items-center">
-        <button type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Bayar</button>
-    </div>
+        <div class="mt-4 flex">
+            <button type="submit"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Bayar</button>
+        </div>
+    </form>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 {% endblock content %}
