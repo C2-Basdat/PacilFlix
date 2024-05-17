@@ -1,10 +1,12 @@
 from django.urls import path
-from authentication.views import show_auth, show_login, show_register
+from authentication.views import *
 
 app_name = 'authentication'
 
 urlpatterns = [
     path('', show_auth, name='show_auth'),
     path('login', show_login, name='show_login'),
-    path('register', show_register, name='show_register')
+    path('api/login', auth_login, name='login'),
+    path('register', show_register, name='show_register'),
+    path('api/logout', auth_logout, name='logout'),
 ]
