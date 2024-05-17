@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+CSRF_TRUSTED_ORIGINS=['http://127.0.0.1:8000/','http://localhost:8000/']
+
 
 # Application definition
 
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'fakhri_hijau',
     'authentication',
     'django_browser_reload',
+    'django.contrib.humanize'
 ]
 
 MIDDLEWARE = [
@@ -131,7 +134,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    'authentication/static/'
+    'authentication/static/',
+    'static'
 ]
 
 # Default primary key field type
