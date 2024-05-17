@@ -29,16 +29,18 @@
                 </thead>
                 <tbody>
                     {% if daftar_unduhan %}
-                        {% for favorit in daftar_unduhan %}
+                        {% for unduhan in daftar_unduhan %}
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ favorit.judul }}
+                                    {{ unduhan.judul }}
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{ favorit.timestamp }}
+                                    {{ unduhan.timestamp }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    Hapus
+                                    <a href="{% url 'daftar_unduhan:delete_daftar_unduhan' unduhan.id_tayangan %}">
+                                        Hapus
+                                    </a>
                                 </td>
                             </tr>
                         {% endfor %}
