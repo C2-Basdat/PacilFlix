@@ -1,52 +1,54 @@
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+from datetime import datetime
+from django.shortcuts import redirect, render
 
-# @login_required(login_url = '/login')
+from utils import DatabaseConnection
+
 def show_daftar_favorit(request):
-    daftar_favorit_user = []
-        
-    context = {
-        'daftar_favorit_user': daftar_favorit_user
-    }
+    # verify login
+    if request.session['user'] == None:
+        return redirect("/auth")
+    context = {'authenticated' : True, 'user' : request.session['user']}
+
+    username = request.session['user']['username']
+    query = f"SELECT * FROM DAFTAR_FAVORIT DF WHERE DF.username = '{username}'"
+    
+    database = DatabaseConnection()
+    daftar_favorit = database.query(query)
+
+    context['daftar_favorit'] = daftar_favorit
+    
     return render(request, 'daftar_favorit.html', context)
 
-def show_daftar_favorit_tw(request):
-    daftar_favorit_user = [
-        {
-            'timestamp': '2024-03-30 03:49:25',
-            'judul': 'The Dark Knight'
-        },
-        {
-            'timestamp': '2024-03-12 07:26:15',
-            'judul': 'Interstellar'
-        },
-        {
-            'timestamp': '2024-03-08 15:39:43',
-            'judul': 'Inception'
-        },
-        {
-            'timestamp': '2024-04-30 21:16:00',
-            'judul': 'La La Land'
-        },
-        {
-            'timestamp': '2024-03-24 08:11:14',
-            'judul': 'Narcos'
-        },
-        {
-            'timestamp': '2024-03-30 09:48:57',
-            'judul': 'Avengers: Endgame'
-        },
-        {
-            'timestamp': '2024-03-15 02:56:13',
-            'judul': 'Sherlock Holmes'
-        },
-        {
-            'timestamp': '2024-03-06 19:00:07',
-            'judul': 'The Lord of the Rings'
-        },
-    ]
-        
-    context = {
-        'daftar_favorit_user': daftar_favorit_user
-    }
-    return render(request, 'daftar_favorit_tailwind.html', context)
+def add_daftar_favorit(request, judul):
+    # verify login
+    if request.session['user'] == None:
+        return redirect("/auth")
+    context = {'authenticated' : True, 'user' : request.session['user']}
+
+    username = request.session['user']['username']
+    select_query = f"SELECT * FROM DAFTAR_FAVORIT DF WHERE DF.username = '{username}' AND DF.judul = '{judul}'"
+
+    database = DatabaseConnection()
+    daftar_favorit = database.query(select_query)
+
+    if not daftar_favorit:
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        insert_query = f"INSERT INTO DAFTAR_FAVORIT (timestamp, username, judul) VALUES('{timestamp}', '{username}', '{judul}')"
+
+        database.query(insert_query)
+
+    return redirect("/fakhri-hijau/tayangan")
+
+def delete_daftar_favorit(request, judul):
+    # verify login
+    if request.session['user'] == None:
+        return redirect("/auth")
+    context = {'authenticated' : True, 'user' : request.session['user']}
+
+    username = request.session['user']['username']
+    delete_query = f"DELETE FROM DAFTAR_FAVORIT DF WHERE DF.username = '{username}' AND DF.judul = '{judul}'"
+
+    database = DatabaseConnection()
+    database.query(delete_query)
+
+    return redirect("/daftar-favorit")
