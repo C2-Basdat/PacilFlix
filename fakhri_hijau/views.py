@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from utils import DatabaseConnection
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 import psycopg2
 
 
@@ -138,12 +138,17 @@ def read_film_series(request, id_tayangan):
         context['is_film'] = False
         data_series = query_data_series(database, id_tayangan)
         context['data_series'] = data_series
-        # context['info_series']
-
-    
-
-    
     return render(request, 'film_series.html', context)
+
+
+def download_tayangan(request, id_tayangan):
+    database = DatabaseConnection()
+
+    now = datetime.now()
+    formatted_now = now.strftime("%Y-%m-%d %H:%M:%S")
+    
+    database.query(f"INSERT INTO TAYANGAN_TERUNDUH VALUES('{id_tayangan}','david','{formatted_now}');")
+    return redirect('read_tayangan')
 
 def read_episode(request):
     database = DatabaseConnection()
@@ -164,9 +169,9 @@ def read_episode(request):
         durasi_minutes = (float(durasi_nonton) / 100) * durasi_episode 
 
         now = datetime.now()
-        end = now + timedelta(minutes=durasi_minutes)
-
         formatted_now = now.strftime("%Y-%m-%d %H:%M:%S")
+
+        end = now + timedelta(minutes=durasi_minutes)
         formatted_end = end.strftime("%Y-%m-%d %H:%M:%S")
 
         insert = database.query(f"INSERT INTO RIWAYAT_NONTON VALUES('{id_tayangan}','hannah','{formatted_now}','{formatted_end}');")
@@ -211,6 +216,13 @@ def query_data_episode(database, id_tayangan, judul_episode):
     hasil = database.query(query_episode)
     for i in range(len(hasil)):
         hasil[i]['episode_lainnya'] = str(hasil[i]['episode_lainnya']).split(", ")
+
+        # Cek dah rilis atau belom -> asumsinya kita bisa langsung nonton meskipun baru rilis di hari tersebut
+        current_date = datetime.now().date()
+        if current_date < hasil[i]['tanggal_rilis_episode']:
+            hasil[i]['released'] = False
+        else:
+            hasil[i]['released'] = True
     return hasil
 
 def query_data_film(database, id_tayangan):
@@ -276,6 +288,13 @@ def query_data_film(database, id_tayangan):
         data_film[i]['actors'] = str(data_film[i]['actors']).split(", ")
         data_film[i]['writers'] = str(data_film[i]['writers']).split(", ")
         data_film[i]['genres'] = str(data_film[i]['genres']).split(", ")
+
+        # Cek dah rilis atau belom
+        current_date = datetime.now().date()
+        if current_date < data_film[i]['release_date']:
+            data_film[i]['released'] = False
+        else:
+            data_film[i]['released'] = True
     return data_film
 
 def query_data_series(database, id_tayangan):
@@ -299,7 +318,6 @@ def query_data_series(database, id_tayangan):
                         episode_durations ed ON rn.id_tayangan = ed.id_series
                     WHERE 
                         EXTRACT(EPOCH FROM (rn.end_date_time - rn.start_date_time)) / 60 >= ed.total_duration * 0.7
-                        AND rn.end_date_time >= NOW() - INTERVAL '7 days'
                     GROUP BY 
                         rn.id_tayangan
                 )
