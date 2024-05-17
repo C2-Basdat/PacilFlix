@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block meta %}
     {{ block.super }}
@@ -42,22 +43,46 @@
             <tbody>
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Premium
+                        {% if active %}
+                            {{ active.nama }}
+                        {% else %}
+                            -
+                        {% endif %}
                     </th>
                     <td class="px-6 py-4">
-                        Rp20.000
+                        {% if active %}
+                            Rp{{ active.harga|intcomma }}
+                        {% else %}
+                            -
+                        {% endif %}
                     </td>
                     <td class="px-6 py-4">
-                        4K
+                        {% if active %}
+                            {{ active.resolusi_layar }}
+                        {% else %}
+                            -
+                        {% endif %}
                     </td>
                     <td class="px-6 py-4">
-                        iOS, Android, TV
+                        {% if active %}
+                            {{ active.dukungan_perangkat }}
+                        {% else %}
+                            -
+                        {% endif %}
                     </td>
                     <td class="px-6 py-4">
-                        29/04/2024
+                        {% if active %}
+                            {{ active.start_date_time }}
+                        {% else %}
+                            -
+                        {% endif %}
                     </td>
                     <td class="px-6 py-4">
-                        29/10/2024
+                        {% if active %}
+                            {{ active.end_date_time }}
+                        {% else %}
+                            -
+                        {% endif %}
                     </td>
                 </tr>
             </tbody>
@@ -88,57 +113,25 @@
                 </tr>
             </thead>
             <tbody>
+                {% for p in packages %}
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Premium
+                        {{ p.nama }}
                     </th>
                     <td class="px-6 py-4">
-                        Rp20.000
+                        Rp{{ p.harga|intcomma }}
                     </td>
                     <td class="px-6 py-4">
-                        4K
+                        {{ p.resolusi_layar }}
                     </td>
                     <td class="px-6 py-4">
-                        iOS, Android, TV
+                        {{ p.dukungan_perangkat }}
                     </td>
                     <td class="px-6 py-4 text-right">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Beli</a>
+                        <a href="/langganan/beli?paket={{ p.nama }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Beli</a>
                     </td>
                 </tr>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Plus
-                    </th>
-                    <td class="px-6 py-4">
-                        Rp15.000
-                    </td>
-                    <td class="px-6 py-4">
-                        Full HD
-                    </td>
-                    <td class="px-6 py-4">
-                        iOS, Android, TV
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Beli</a>
-                    </td>
-                </tr>
-                <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Reguler
-                    </th>
-                    <td class="px-6 py-4">
-                        Rp10.000
-                    </td>
-                    <td class="px-6 py-4">
-                        HD
-                    </td>
-                    <td class="px-6 py-4">
-                        iOS, Android
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Beli</a>
-                    </td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
@@ -154,7 +147,7 @@
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Tanggal Dimulai
-                    </th>
+                </th>
                     <th scope="col" class="px-6 py-3">
                         Tanggal Akhir
                     </th>
@@ -170,46 +163,28 @@
                 </tr>
             </thead>
             <tbody>
+                {% for t in transactions %}
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Premium
+                        {{ t.nama }}
                     </th>
                     <td class="px-6 py-4">
-                        29/04/2024
+                        {{ t.start_date_time }}
                     </td>
                     <td class="px-6 py-4">
-                        29/10/2024
+                        {{ t.end_date_time }}
                     </td>
                     <td class="px-6 py-4">
-                        GoPay
+                        {{ t.metode_pembayaran }}
                     </td>
                     <td class="px-6 py-4">
-                        29/04/2024
+                        {{ t.timestamp_pembayaran }}
                     </td>
                     <td class="px-6 py-4">
-                        Rp20.000
+                        Rp{{ t.harga|intcomma }}
                     </td>
                 </tr>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Plus
-                    </th>
-                    <td class="px-6 py-4">
-                        15/03/2024
-                    </td>
-                    <td class="px-6 py-4">
-                        15/09/2024
-                    </td>
-                    <td class="px-6 py-4">
-                        ShopeePay
-                    </td>
-                    <td class="px-6 py-4">
-                        15/03/2024
-                    </td>
-                    <td class="px-6 py-4">
-                        Rp15.000
-                    </td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
