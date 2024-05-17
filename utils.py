@@ -1,4 +1,8 @@
 import psycopg2
+from collections import namedtuple
+from psycopg2 import Error
+from psycopg2.extras import RealDictCursor
+
 
 class DatabaseConnection:
     def __init__(self):
@@ -8,9 +12,6 @@ class DatabaseConnection:
         self.host = 'monorail.proxy.rlwy.net'
         self.port = '39869'
         self.connection = None
-
-        # Membuka koneksi saat objek dibuat
-        self.connect()
 
     def connect(self):
         self.connection = psycopg2.connect(
@@ -25,23 +26,30 @@ class DatabaseConnection:
         if self.connection is not None:
             self.connection.close()
 
-    def execute_sql_query(self, query, fetch=True):
-        cursor = self.connection.cursor()
-        cursor.execute("SET search_path TO pacilflix")
-        cursor.execute(query)
-        self.connection.commit()
+    def map_cursor(self, cursor):
+        desc = cursor.description
+        nt_result = namedtuple("Result", [col[0] for col in desc])
+        return [dict(row) for row in cursor.fetchall()]
 
-        result = None
-        if fetch:
-            result = cursor.fetchall()
 
-        cursor.close()
+    def query(self, query_str: str):
+        self.connect()
+        hasil = []
+        with self.connection.cursor(cursor_factory=RealDictCursor) as cursor:
+            cursor.execute("SET SEARCH_PATH TO PACILFLIX")
+            try:
+                cursor.execute(query_str)
 
-        return result
-
-    def execute_sql_query_no_fetch(self, query):
-        cursor = self.connection.cursor()
-        cursor.execute("SET search_path TO pacilflix")
-        cursor.execute(query)
-        self.connection.commit()
-        cursor.close()
+                if query_str.strip().upper().startswith("SELECT") or query_str.strip().upper().startswith("WITH"):
+                    # Kalau ga error, return hasil SELECT
+                    hasil = self.map_cursor(cursor)
+                else:
+                    # Kalau ga error, return jumlah row yang termodifikasi oleh INSERT, UPDATE, DELETE
+                    hasil = cursor.rowcount
+                    self.connection.commit()
+            except Exception as e:
+                # Ga tau error apa
+                hasil = e
+        
+        self.disconnect()
+        return hasil

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>My Website</title>
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <link href="./output.css" rel="stylesheet" />
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+            <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+                <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                    <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
+                        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">PacilFlix - C2</span>
+                    </a>
+                    <div class="flex justify-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                        <button type="button" class="flex text-sm bg-white rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                            </svg> 
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+                        <div class="px-4 py-3">
+                            <span class="block text-sm text-gray-900 dark:text-white">John Doe</span>
+                        </div>
+                        <ul class="py-2" aria-labelledby="user-menu-button">
+                            <li>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Kelola Daftar Favorit</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Kelola Daftar Unduhan</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Kelola Langganan</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</a>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                    <div class="grow items-center justify-end px-5 hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+                        <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                            <!-- Ini utk yg selected (biru) -->
+                            <!-- <li>
+                                <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Selected</a>
+                            </li> -->
+                            <li>
+                                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Trailer Tayangan</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Daftar Tayangan</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Daftar Kontributor</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+              </nav>
+        </header>
+
+        <div class="px-10 py-5 mx-10 mt-5">
+      {% if is_film %}
+      <h1
+        class="my-10 text-center text-xl font-bold leading-none text-gray-900 dark:text-white"
+      >
+        Halaman Film
+      </h1>
+      {% for film in data_film %}
+      <h2
+        class="px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Judul: {{ film.title }}
+      </h2>
+      <form method="POST" action="{% url 'read_film_series' film.film_id %}">
+        {% csrf_token %}
+        <div class="flex justify-center my-5">
+          <label
+            for="default-range"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Menit Nonton</label
+          >
+        </div>
+        <input
+          id="default-range"
+          name="durasi"
+          type="range"
+          value="0"
+          class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+        /><br />
+        <div class="flex justify-center my-5">
+          <button
+            type="submit"
+            class="text-gray-900 bg-[#F7BE38] hover:bg-[#F7BE38]/90 focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2"
+          >
+            Selesai nonton
+          </button>
+        </div>
+      </form>
+      <div class="flex justify-center my-5">
+        <div class="inline-flex rounded-md shadow-sm" role="group">
+          <button
+            type="button"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-s-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700"
+          >
+            <svg
+              class="w-3 h-3 me-2"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"
+              />
+            </svg>
+            Nonton
+          </button>
+          <button
+            type="button"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border-t border-b border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700"
+          >
+            <svg
+              class="w-3 h-3 me-2"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z"
+              />
+              <path
+                d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
+              />
+            </svg>
+            Download
+          </button>
+          <button
+            type="button"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-e-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700"
+          >
+            <svg
+              class="w-3 h-3 me-2"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 12.25V1m0 11.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M4 19v-2.25m6-13.5V1m0 2.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M10 19V7.75m6 4.5V1m0 11.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM16 19v-2"
+              />
+            </svg>
+            Favorit
+          </button>
+        </div>
+      </div>
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Total View: {{ film.total_views }}
+      </h2>
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Rating Rata-Rata: {{ film.average_rating }}
+      </h2>
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Sinopsis: {{ film.synopsis }}
+      </h2>
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Durasi Film: {{ film.durasi }}
+      </h2>
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Tanggal Rilis Film: {{ film.release_date }}
+      </h2>
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        URL Film: {{ film.url_film }}
+      </h2>
+
+      <div class="my-5 px-20 mx-20">
+        <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
+          Genre:
+        </h2>
+        <ul
+        class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400"
+        >
+          {% for genre in film.genres %}
+          <li>{{ genre }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Asal Negara: {{ film.country }}
+      </h2>
+
+      <div class="flex justify-center content-center">
+        <!-- Data Pemain -->
+        <div
+          class="mx-3 w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <h5
+              class="text-xl font-bold leading-none text-gray-900 dark:text-white"
+            >
+              Pemain
+            </h5>
+            <a
+              href="#"
+              class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
+            >
+              View all
+            </a>
+          </div>
+          <div class="flow-root">
+            <ul
+              role="list"
+              class="divide-y divide-gray-200 dark:divide-gray-700"
+            >
+              {% for actor in film.actors %}
+              <li class="py-3 sm:py-4">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0">
+                    <svg class="w-[32px] h-[32px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                    </svg>
+
+                  </div>
+                  <div class="flex-1 min-w-0 ms-4">
+                    <p
+                      class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                    >
+                      {{ actor }}
+                    </p>
+                  </div>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Data Sutradara -->
+
+        <div
+          class="mx-3 w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <h5
+              class="text-xl font-bold leading-none text-gray-900 dark:text-white"
+            >
+              Penulis Skenario
+            </h5>
+            <a
+              href="#"
+              class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
+            >
+              View all
+            </a>
+          </div>
+          <div class="flow-root">
+            <ul
+              role="list"
+              class="divide-y divide-gray-200 dark:divide-gray-700"
+            >
+              {% for writer in film.writers %}
+              <li class="py-3 sm:py-4">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0">
+                    <svg class="w-[32px] h-[32px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                    </svg>
+
+                  </div>
+                  <div class="flex-1 min-w-0 ms-4">
+                    <p
+                      class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                    >
+                      {{ writer }}
+                    </p>
+                  </div>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Sutradara: {{ film.director }}
+      </h2>
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Ulasan Film Ini <span>
+            <form method="GET" action="{% url 'create_read_ulasan' %}">
+              <input type="hidden" name="id_tayangan" value="{{ film.film_id }}">
+              <button type="submit" class="mx-3 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Lihat Ulasan
+              </button>
+            </form>
+        </span>
+      </h2>
+    {% endfor %}
+      
+
+    {% else %}
+      <h1
+        class="my-10 text-center text-xl font-bold leading-none text-gray-900 dark:text-white"
+      >
+        Halaman Series
+      </h1>
+      {% for series in data_series %}
+      <h2
+        class="px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Judul: {{ series.title }}
+    </h2>
+
+      <div class="my-5 px-20 mx-20">
+        <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
+          Episode:
+        </h2>
+        <ul
+          class="max-w-md space-y-1 text-500 list-disc list-inside dark:text-gray-400"
+        >
+          {% for judul_episode, link_episode in series.judul_url_episodes %}
+          <!-- Form dengan dua input yang tersembunyi -->
+          <form id="myForm" method="get" action="{% url 'read_episode' %}">
+            <!-- Input pertama -->
+            <input type="hidden" name="id_tayangan" value="{{ series.series_id }}">
+            <!-- Input kedua -->
+            <input type="hidden" name="judul_episode" value="{{ judul_episode }}">
+            <li>
+              <!-- Tombol submit -->
+              <input type="submit" value="{{ judul_episode }}">
+            </li>
+          </form>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="flex justify-center my-5">
+        <div class="inline-flex rounded-md shadow-sm" role="group">
+          <button
+            type="button"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-s-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700"
+          >
+            <svg
+              class="w-3 h-3 me-2"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z"
+              />
+              <path
+                d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
+              />
+            </svg>
+            Download
+          </button>
+          <button
+            type="button"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-e-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700"
+          >
+            <svg
+              class="w-3 h-3 me-2"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 12.25V1m0 11.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M4 19v-2.25m6-13.5V1m0 2.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M10 19V7.75m6 4.5V1m0 11.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM16 19v-2"
+              />
+            </svg>
+            Favorit
+          </button>
+        </div>
+      </div>
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Total View: {{ series.total_views }}
+      </h2>
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Rating Rata-Rata: {{ series.average_rating }}
+      </h2>
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Sinopsis: {{ series.synopsis }}
+      </h2>
+
+      <div class="my-5 px-20 mx-20">
+        <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
+          Genre:
+        </h2>
+        <ul
+        class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400"
+        >
+          {% for genre in series.genres %}
+          <li>{{ genre }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Asal Negara: {{ series.country }}
+      </h2>
+
+      <div class="flex justify-center content-center">
+        <!-- Data Pemain -->
+        <div
+          class="mx-3 w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <h5
+              class="text-xl font-bold leading-none text-gray-900 dark:text-white"
+            >
+              Pemain
+            </h5>
+            <a
+              href="#"
+              class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
+            >
+              View all
+            </a>
+          </div>
+          <div class="flow-root">
+            <ul
+              role="list"
+              class="divide-y divide-gray-200 dark:divide-gray-700"
+            >
+              {% for actor in series.actors %}
+              <li class="py-3 sm:py-4">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0">
+                    <svg class="w-[32px] h-[32px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                    </svg>
+
+                  </div>
+                  <div class="flex-1 min-w-0 ms-4">
+                    <p
+                      class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                    >
+                      {{ actor }}
+                    </p>
+                  </div>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Data Sutradara -->
+
+        <div
+          class="mx-3 w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <h5
+              class="text-xl font-bold leading-none text-gray-900 dark:text-white"
+            >
+              Penulis Skenario
+            </h5>
+            <a
+              href="#"
+              class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
+            >
+              View all
+            </a>
+          </div>
+          <div class="flow-root">
+            <ul
+              role="list"
+              class="divide-y divide-gray-200 dark:divide-gray-700"
+            >
+              {% for writer in series.writers %}
+              <li class="py-3 sm:py-4">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0">
+                    <svg class="w-[32px] h-[32px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                    </svg>
+
+                  </div>
+                  <div class="flex-1 min-w-0 ms-4">
+                    <p
+                      class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                    >
+                      {{ writer }}
+                    </p>
+                  </div>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Sutradara: {{ series.director }}
+      </h2>
+      <h2
+        class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        Ulasan Series Ini <span>
+            <form method="GET" action="{% url 'create_read_ulasan' %}">
+              <input type="hidden" name="id_tayangan" value="{{ series.series_id }}">
+              <button type="submit" class="mx-3 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Lihat Ulasan
+              </button>
+            </form>
+        </span>
+      </h2>
+      {% endfor %}
+      
+      {% endif %}
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
+  </body>
+</html>
