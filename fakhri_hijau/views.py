@@ -81,6 +81,12 @@ def read_trailer(request):
     trailer_film = database.query(query_trailer_film)
     trailer_series = database.query(query_trailer_series)
     context = {'tayangan_terbaik': tayangan_terbaik, 'trailer_film': trailer_film, 'trailer_series': trailer_series}
+
+    if 'user' in request.session:
+        context['authenticated'] = True
+        context['username'] = request.session['user']['username']
+    else:
+        context['authenticated'] = False
     
     if request.method == "GET":
         judul = request.GET.get('judul', '')
@@ -107,12 +113,29 @@ def read_tayangan(request):
             # Lakukan pencarian berdasarkan judul film
             hasil_cari_tayangan = database.query(f"SELECT id, judul, sinopsis_trailer, url_video_trailer, release_date_trailer FROM TAYANGAN WHERE judul ilike '%{judul}%';")
             context['hasil_cari_tayangan'] = hasil_cari_tayangan
+    
+    if 'user' in request.session:
+        context['authenticated'] = True
+        context['username'] = request.session['user']['username']
+    else:
+        context['authenticated'] = False
+        return redirect("authentication:show_auth")
+    
+    context['have_paket'] = database.query(f"SELECT EXISTS (SELECT 1 FROM transaction WHERE username = '{context['username']}' AND end_date_time > CURRENT_DATE AND timestamp_pembayaran = (SELECT MAX(timestamp_pembayaran) FROM transaction WHERE username = '{context['username']}')) AS user_exists;")[0]['user_exists']
         
     return render(request, 'tayangan.html', context)
 
 def read_film_series(request, id_tayangan):
     context = {}
     database = DatabaseConnection()
+
+    if 'user' not in request.session:
+        context['authenticated'] = False
+        return redirect("authentication:show_auth")
+    
+    context['authenticated'] = True
+    context['username'] = request.session['user']['username']
+    
     is_film = list(database.query(f"select * from film where id_tayangan='{str(id_tayangan)}';"))
     if len(is_film):
         context['is_film'] = True
@@ -129,7 +152,7 @@ def read_film_series(request, id_tayangan):
             formatted_now = now.strftime("%Y-%m-%d %H:%M:%S")
             formatted_end = end.strftime("%Y-%m-%d %H:%M:%S")
 
-            insert = database.query(f"INSERT INTO RIWAYAT_NONTON VALUES('{id_tayangan}','frank','{formatted_now}','{formatted_end}');")
+            insert = database.query(f"INSERT INTO RIWAYAT_NONTON VALUES('{id_tayangan}','{context['username']}','{formatted_now}','{formatted_end}');")
             print(insert)
         
         data_film = query_data_film(database, id_tayangan)
@@ -144,15 +167,26 @@ def read_film_series(request, id_tayangan):
 def download_tayangan(request, id_tayangan):
     database = DatabaseConnection()
 
+    if 'user' not in request.session:
+        return redirect("authentication:show_auth")
+    username = request.session['user']['username']
+
     now = datetime.now()
     formatted_now = now.strftime("%Y-%m-%d %H:%M:%S")
     
-    database.query(f"INSERT INTO TAYANGAN_TERUNDUH VALUES('{id_tayangan}','david','{formatted_now}');")
+    database.query(f"INSERT INTO TAYANGAN_TERUNDUH VALUES('{id_tayangan}','{username}','{formatted_now}');")
     return redirect('read_tayangan')
 
 def read_episode(request):
     database = DatabaseConnection()
     context = {}
+
+    if 'user' not in request.session:
+        context['authenticated'] = False
+        return redirect("authentication:show_auth")
+    
+    context['authenticated'] = True
+    context['username'] = request.session['user']['username']
 
     if request.method == "GET":
         id_tayangan = request.GET.get('id_tayangan')
@@ -174,17 +208,22 @@ def read_episode(request):
         end = now + timedelta(minutes=durasi_minutes)
         formatted_end = end.strftime("%Y-%m-%d %H:%M:%S")
 
-        insert = database.query(f"INSERT INTO RIWAYAT_NONTON VALUES('{id_tayangan}','hannah','{formatted_now}','{formatted_end}');")
+        insert = database.query(f"INSERT INTO RIWAYAT_NONTON VALUES('{id_tayangan}','{context['username']}','{formatted_now}','{formatted_end}');")
         print(insert)
         context['data'] = query_data_episode(database, id_tayangan, judul_episode)
-
-
 
     return render(request, 'episode.html', context)
 
 def create_read_ulasan(request):
     database = DatabaseConnection()
     context = {'already_reviewed':False}
+
+    if 'user' not in request.session:
+        context['authenticated'] = False
+        return redirect("authentication:show_auth")
+    
+    context['authenticated'] = True
+    context['username'] = request.session['user']['username']
 
     if request.method == "GET":
         id_tayangan = request.GET.get('id_tayangan')
@@ -199,7 +238,7 @@ def create_read_ulasan(request):
 
         now = datetime.now()
         formatted_now = now.strftime("%Y-%m-%d %H:%M:%S")
-        insert_response = database.query(f"INSERT INTO ULASAN VALUES('{id_tayangan}','grace','{formatted_now}',{int(rating)},'{deskripsi}');")
+        insert_response = database.query(f"INSERT INTO ULASAN VALUES('{id_tayangan}','{context['username']}','{formatted_now}',{int(rating)},'{deskripsi}');")
         if isinstance(insert_response, psycopg2.errors.RaiseException):
             context['already_reviewed'] = True
         
