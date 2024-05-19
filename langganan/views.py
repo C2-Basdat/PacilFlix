@@ -137,6 +137,8 @@ def beli(request):
 
         return render(request, 'beli.html', context)
     elif request.method == 'POST':
+        if 'user' not in request.session:
+            return redirect("/auth")
         username = request.session['user']['username']
         paket = request.POST.get('paket')
         payment_method = request.POST.get('method')

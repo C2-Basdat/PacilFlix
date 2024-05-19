@@ -27,9 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-CSRF_TRUSTED_ORIGINS=['http://127.0.0.1:8000/','http://localhost:8000/']
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,8 +42,7 @@ INSTALLED_APPS = [
     'kontributor',
     'fakhri_hijau',
     'authentication',
-    'django_browser_reload',
-    'django.contrib.humanize'
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'pacilflix.urls'
@@ -79,7 +75,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'pacilflix.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases

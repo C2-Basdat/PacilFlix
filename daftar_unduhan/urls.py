@@ -1,9 +1,10 @@
 from django.urls import path
-from daftar_unduhan.views import show_daftar_unduhan, show_daftar_unduhan_tw
+from daftar_unduhan.views import show_daftar_unduhan, add_daftar_unduhan, delete_daftar_unduhan
 
 app_name = 'daftar_unduhan'
 
 urlpatterns = [
     path('', show_daftar_unduhan, name='show_daftar_unduhan'),
-    path('tw', show_daftar_unduhan_tw, name='show_daftar_unduhan_tw'),
+    path('add-daftar-unduhan/<str:id_tayangan>', add_daftar_unduhan, name='add_daftar_unduhan'),
+    path('delete-daftar-unduhan/<str:id_tayangan>', delete_daftar_unduhan, name='delete_daftar_unduhan'),
 ]
