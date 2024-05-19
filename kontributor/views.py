@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from utils import DatabaseConnection
 
 def index(request):
+    if 'user' not in request.session:
+        return redirect("/auth")
     database = DatabaseConnection()
 
     filter = request.GET.get('filter', None)

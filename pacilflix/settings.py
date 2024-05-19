@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
+
+ENVIRONMENT = env('DJANGO_ENV', default='development')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,8 +48,7 @@ INSTALLED_APPS = [
     'kontributor',
     'fakhri_hijau',
     'authentication',
-    'django_browser_reload',
-    'django.contrib.humanize'
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +59,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'pacilflix.urls'
@@ -77,6 +81,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pacilflix.wsgi.application'
 
+
+if ENVIRONMENT == 'development':
+    INSTALLED_APPS += ['django_browser_reload',]
+
+    MIDDLEWARE += ['django_browser_reload.middleware.BrowserReloadMiddleware',]
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases

@@ -5,7 +5,7 @@ from utils import DatabaseConnection
 
 def show_daftar_favorit(request):
     # verify login
-    if request.session['user'] == None:
+    if 'user' not in request.session:
         return redirect("/auth")
     context = {'authenticated' : True, 'user' : request.session['user']}
 
@@ -21,7 +21,7 @@ def show_daftar_favorit(request):
 
 def add_daftar_favorit(request, judul):
     # verify login
-    if request.session['user'] == None:
+    if 'user' not in request.session:
         return redirect("/auth")
     context = {'authenticated' : True, 'user' : request.session['user']}
 
@@ -41,7 +41,7 @@ def add_daftar_favorit(request, judul):
 
 def delete_daftar_favorit(request, judul):
     # verify login
-    if request.session['user'] == None:
+    if 'user' not in request.session:
         return redirect("/auth")
     context = {'authenticated' : True, 'user' : request.session['user']}
 

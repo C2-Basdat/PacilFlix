@@ -7,3 +7,4 @@ urllib3
 django-browser-reload
 psycopg2
 collection
+django-environ
