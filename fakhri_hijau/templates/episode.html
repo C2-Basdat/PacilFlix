@@ -1,0 +1,115 @@
+{% extends 'base.html' %} {% block meta %} {{ block.super }}
+<title>Pacilflix - Halaman Episode</title>
+{% endblock meta %} {% block content %} {{ block.super }}
+
+<div class="px-10 py-5 mx-10 mt-5">
+  <h1
+    class="my-10 text-center text-xl font-bold leading-none text-gray-900 dark:text-white"
+  >
+    Halaman Episode
+  </h1>
+  <h2
+    class="px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+  >
+    {% for episode in data %} Judul: {{ episode.judul }}
+  </h2>
+  <h2
+    class="px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+  >
+    Subjudul: {{ episode.subjudul }}
+  </h2>
+
+  {% if episode.released %}
+  <form id="formNontonEpisode" method="POST" action="{% url 'read_episode' %}">
+    {% csrf_token %}
+    <div class="flex justify-center my-5">
+      <label
+        for="default-range"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Menit Nonton</label
+      >
+    </div>
+    <input type="hidden" name="id_tayangan" value="{{ episode.id }}" />
+    <input type="hidden" name="judul_episode" value="{{ episode.subjudul }}" />
+    <input
+      id="default-range"
+      name="durasi"
+      type="range"
+      value="0"
+      class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+    />
+  </form>
+  <div class="flex justify-center my-5">
+    <button
+      type="button"
+      onclick="document.getElementById('formNontonEpisode').submit();"
+      class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 me-2 mb-2"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-5 h-5 me-2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"
+        />
+      </svg>
+
+      Nonton
+    </button>
+  </div>
+  {% endif %}
+  <div class="my-5 px-20 mx-20">
+    <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
+      Episode Lainnya:
+    </h2>
+    <ul
+      class="max-w-md space-y-1 text-500 list-disc list-inside dark:text-gray-400"
+    >
+      {% for episode_lainnya in episode.episode_lainnya %}
+      <form id="myForm" method="get" action="{% url 'read_episode' %}">
+        <!-- Input pertama -->
+        <input type="hidden" name="id_tayangan" value="{{ episode.id }}" />
+        <!-- Input kedua -->
+        <input
+          type="hidden"
+          name="judul_episode"
+          value="{{ episode_lainnya }}"
+        />
+        <li>
+          <!-- Tombol submit -->
+          <input type="submit" value="{{ episode_lainnya }}" />
+        </li>
+      </form>
+      <!-- <li><a href="#">Episode 3</a></li> -->
+      {% endfor %}
+    </ul>
+  </div>
+  <h2
+    class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+  >
+    Sinopsis: {{ episode.sinopsis_episode }}
+  </h2>
+  <h2
+    class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+  >
+    Durasi Film: {{ episode.durasi_episode }}
+  </h2>
+  <h2
+    class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+  >
+    URL Film: {{ episode.url_episode }}
+  </h2>
+  <h2
+    class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+  >
+    Tanggal Rilis Episode: {{ episode.tanggal_rilis_episode }}
+  </h2>
+  {% endfor %}
+</div>
+{% endblock content %}
