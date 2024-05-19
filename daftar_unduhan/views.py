@@ -5,7 +5,7 @@ from utils import DatabaseConnection
 
 def show_daftar_unduhan(request):
     # verify login
-    if request.session['user'] == None:
+    if 'user' not in request.session:
         return redirect("/auth")
     context = {'authenticated' : True, 'user' : request.session['user']}
 
@@ -21,7 +21,7 @@ def show_daftar_unduhan(request):
 
 def add_daftar_unduhan(request, id_tayangan):
     # verify login
-    if request.session['user'] == None:
+    if 'user' not in request.session:
         return redirect("/auth")
     context = {'authenticated' : True, 'user' : request.session['user']}
 
@@ -42,7 +42,7 @@ def add_daftar_unduhan(request, id_tayangan):
 
 def delete_daftar_unduhan(request, id_tayangan):
     # verify login
-    if request.session['user'] == None:
+    if 'user' not in request.session:
         return redirect("/auth")
     context = {'authenticated' : True, 'user' : request.session['user']}
 
