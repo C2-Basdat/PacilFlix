@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from authentication.backends import AuthBackend
+from django.views.decorators.csrf import csrf_exempt
 
 def show_auth(request):
     return render(request, 'auth.html')
