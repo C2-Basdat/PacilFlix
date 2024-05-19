@@ -62,7 +62,7 @@
         Nonton
       </button>
       <a
-        href="{% url 'download_tayangan' film.film_id %}"
+        href="{% url 'daftar_unduhan:add_daftar_unduhan' film.film_id %}"
         class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700"
       >
         <svg
@@ -81,8 +81,9 @@
         </svg>
         Download
       </a>
-      <button
-        type="button"
+
+      <a
+        href="{% url 'daftar_favorit:add_daftar_favorit' film.title %}"
         class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-e-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700"
       >
         <svg
@@ -101,13 +102,15 @@
         </svg>
 
         Favorit
-      </button>
+      </a>
+
     </div>
   </div>
   <!-- Kalau belum rilis -->
   {% else %}
-  <button
-    type="button"
+  <div class="flex justify-center my-5"></div>
+  <a
+      href="{% url 'daftar_favorit:add_daftar_favorit' film.title %}"
     class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 me-2 mb-2"
   >
     <svg
@@ -122,7 +125,8 @@
     </svg>
 
     Tambahkan ke Daftar Favorit
-  </button>
+  </a>
+  </div>
   {% endif %}
   <h2
     class="my-5 px-20 mx-20 mb-2 text-lg font-semibold text-gray-900 dark:text-white"
@@ -349,7 +353,7 @@
   <div class="flex justify-center my-5">
     <div class="inline-flex rounded-md shadow-sm" role="group">
       <a
-        href="{% url 'download_tayangan' series.series_id %}"
+        href="{% url 'daftar_unduhan:add_daftar_unduhan' series.series_id %}"
         class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-s-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700"
       >
         <svg
@@ -368,8 +372,8 @@
         </svg>
         Download
       </a>
-      <button
-        type="button"
+      <a
+        href="{% url 'daftar_favorit:add_daftar_favorit' series.title %}"
         class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-e-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700"
       >
         <svg
@@ -388,7 +392,7 @@
           />
         </svg>
         Favorit
-      </button>
+      </a>
     </div>
   </div>
   <h2
