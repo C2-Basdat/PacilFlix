@@ -2,8 +2,6 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 from django.urls import path, include
 
-from pacilflix import settings
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('daftar-favorit/', include('daftar_favorit.urls')),
@@ -14,8 +12,3 @@ urlpatterns = [
     path('auth/', include('authentication.urls')),
     path('', RedirectView.as_view(url='/fakhri-hijau/tayangan', permanent=False)),
 ]
-
-if settings.ENVIRONMENT == 'development':
-    urlpatterns += [
-        path("__reload__/", include("django_browser_reload.urls")),
-    ]
