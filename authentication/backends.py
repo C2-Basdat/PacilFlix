@@ -1,4 +1,5 @@
 from django.contrib.auth.backends import BaseBackend
+import psycopg2
 from authentication.models import User
 from utils import DatabaseConnection
 
@@ -29,3 +30,12 @@ class AuthBackend(BaseBackend):
 
     def logout(self, request):
         request.session.clear()
+
+    def register(self, username, password, negara_asal):
+        insertUserQuery = f"insert into pengguna values ('{username}', '{password}', '{negara_asal}')"
+        queryResult = database.query(insertUserQuery)
+        if isinstance(queryResult, psycopg2.errors.RaiseException):
+            return queryResult
+        return None
+        
+        

@@ -3,12 +3,12 @@ async function handleFormSubmit(event) {
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
     login(username, password).then(response => {
-        console.log(response.json())
-        if (response.ok) {
+        if (response.status == 200) {
             window.location.href = '/fakhri-hijau/tayangan';
+        } else if (response.status = 401) {
+            document.getElementById('login-fail-msg').classList.remove('hidden')
         }
     })
-    
 }
 
 function login(username, password) {
