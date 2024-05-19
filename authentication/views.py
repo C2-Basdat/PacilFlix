@@ -1,18 +1,24 @@
 import json
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 import psycopg2
 from authentication.backends import AuthBackend
 from django.views.decorators.csrf import csrf_exempt
 
 def show_auth(request):
+    if 'user' in request.session:
+        return redirect('/fakhri-hijau/tayangan')
     return render(request, 'auth.html')
 
 def show_login(request):
+    if 'user' in request.session:
+        return redirect('/fakhri-hijau/tayangan')
     return render(request, 'login.html')
 
 def show_register(request):
+    if 'user' in request.session:
+        return redirect('/fakhri-hijau/tayangan')
     return render(request, 'register.html')
 
 @csrf_exempt
