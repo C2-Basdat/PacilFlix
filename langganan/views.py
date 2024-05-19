@@ -151,6 +151,5 @@ def beli(request):
         """
 
         result = database.query(query_str)
-        print(result)
 
         return redirect('langganan:index')
